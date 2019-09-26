@@ -9,9 +9,10 @@ import org.springframework.stereotype.Component;
 public class DisciplineResponseConverter implements Converter<Discipline, DisciplineResponse> {
     @Override
     public DisciplineResponse convert(Discipline discipline) {
-        DisciplineResponse disciplineResponse =  new DisciplineResponse();
-        disciplineResponse.setName(discipline.getName());
-        disciplineResponse.setProfessor(discipline.getProfessor());
-        return disciplineResponse;
+        return DisciplineResponse.builder()
+                .id(discipline.getId())
+                .name(discipline.getName())
+                .description(discipline.getDescription())
+                .professor(discipline.getProfessor()).build();
     }
 }

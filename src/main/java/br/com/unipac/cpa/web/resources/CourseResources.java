@@ -58,7 +58,7 @@ public class CourseResources {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.SEGMENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.COURSES_IN_CACHE, allEntries = true)
 	public ResponseEntity<CourseResponse> add(@Valid @RequestBody CourseRequest courseRequest) {
 		CourseResponse result = conversionSupport.convertToCreate(courseRequest);
 
@@ -73,7 +73,7 @@ public class CourseResources {
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.SEGMENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.COURSES_IN_CACHE, allEntries = true)
 	public ResponseEntity<CourseResponse> change(@PathVariable("id") Long id,
 												 @RequestBody CourseRequest courseRequest) {
 		CourseResponse result = conversionSupport.convertToChange(id, courseRequest);
@@ -88,7 +88,7 @@ public class CourseResources {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.SEGMENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.COURSES_IN_CACHE, allEntries = true)
 	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
 		boolean result = conversionSupport.remove(id);
 		if (result) {

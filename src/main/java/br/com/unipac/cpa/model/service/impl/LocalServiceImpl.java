@@ -1,9 +1,11 @@
 package br.com.unipac.cpa.model.service.impl;
 
+import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.model.domain.Local;
 import br.com.unipac.cpa.model.repository.LocalRepository;
 import br.com.unipac.cpa.model.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,16 +31,19 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
+    @Cacheable(Constants.LOCALS_IN_CACHE)
     public List<Local> listAll() {
         return localRepository.findAll();
     }
 
     @Override
+    @Cacheable(Constants.LOCALS_IN_CACHE)
     public Page<Local> findAllPageable(Pageable pageable) {
         return localRepository.findAll(pageable);
     }
 
     @Override
+    @Cacheable(Constants.LOCALS_IN_CACHE)
     public Optional<Local> findById(Long id) {
         return localRepository.findById(id);
     }

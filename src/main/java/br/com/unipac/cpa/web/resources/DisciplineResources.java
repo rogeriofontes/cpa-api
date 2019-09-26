@@ -57,7 +57,7 @@ public class DisciplineResources {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.COMPANYS_TYPES_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.DISCIPLINES_IN_CACHE, allEntries = true)
     public ResponseEntity<DisciplineResponse> add(@Valid @RequestBody DisciplineRequest disciplineRequest) {
         DisciplineResponse result = conversionSupport.convertToCreate(disciplineRequest);
 
@@ -73,7 +73,7 @@ public class DisciplineResources {
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.COMPANYS_TYPES_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.DISCIPLINES_IN_CACHE, allEntries = true)
     public ResponseEntity<DisciplineResponse> change(@PathVariable Long id, @RequestBody DisciplineRequest disciplineRequest) {
         DisciplineResponse result = conversionSupport.convertToChange(id, disciplineRequest);
 
@@ -87,7 +87,7 @@ public class DisciplineResources {
 
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.COMPANYS_TYPES_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.DISCIPLINES_IN_CACHE, allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         boolean result = conversionSupport.remove(id);
         if (result) {

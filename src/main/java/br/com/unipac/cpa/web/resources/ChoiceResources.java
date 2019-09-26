@@ -1,9 +1,9 @@
 package br.com.unipac.cpa.web.resources;
 
 import br.com.unipac.cpa.constants.Constants;
-import br.com.unipac.cpa.web.dto.request.PeriodRequest;
-import br.com.unipac.cpa.web.dto.response.PeriodResponse;
-import br.com.unipac.cpa.web.support.PeriodSupport;
+import br.com.unipac.cpa.web.dto.request.ChoiceRequest;
+import br.com.unipac.cpa.web.dto.response.ChoiceResponse;
+import br.com.unipac.cpa.web.support.ChoiceSupport;
 import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,19 +19,20 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/periods")
-public class PeriodResources {
+@RequestMapping("/v1/choices")
+public class ChoiceResources {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private PeriodSupport conversionSupport;
+    private ChoiceSupport conversionSupport;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Timed
     public ResponseEntity<?> getAll() {
         logger.info("teste");
-        List<PeriodResponse> result = conversionSupport.list();
+        List<ChoiceResponse> result = conversionSupport.list();
 
         if (result != null) {
             logger.info(Constants.TOTAL + result.size());
@@ -44,8 +45,8 @@ public class PeriodResources {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Timed
-    public ResponseEntity<PeriodResponse> get(@PathVariable("id") Long id) {
-        PeriodResponse result = conversionSupport.convertToFindById(id);
+    public ResponseEntity<ChoiceResponse> get(@PathVariable("id") Long id) {
+        ChoiceResponse result = conversionSupport.convertToFindById(id);
 
         if (result != null) {
             logger.info(Constants.TOTAL + result.toString());
@@ -57,9 +58,9 @@ public class PeriodResources {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
-    public ResponseEntity<PeriodResponse> add(@Valid @RequestBody PeriodRequest periodRequest) {
-        PeriodResponse result = conversionSupport.convertToCreate(periodRequest);
+    @CacheEvict(value = Constants.CHOICES_IN_CACHE, allEntries = true)
+    public ResponseEntity<ChoiceResponse> add(@Valid @RequestBody ChoiceRequest choiceRequest) {
+        ChoiceResponse result = conversionSupport.convertToCreate(choiceRequest);
 
         if (result != null) {
             logger.info(Constants.TOTAL + result.toString());
@@ -73,9 +74,9 @@ public class PeriodResources {
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
-    public ResponseEntity<PeriodResponse> change(@PathVariable Long id, @RequestBody PeriodRequest periodRequest) {
-        PeriodResponse result = conversionSupport.convertToChange(id, periodRequest);
+    @CacheEvict(value = Constants.CHOICES_IN_CACHE, allEntries = true)
+    public ResponseEntity<ChoiceResponse> change(@PathVariable Long id, @RequestBody ChoiceRequest choiceRequest) {
+        ChoiceResponse result = conversionSupport.convertToChange(id, choiceRequest);
 
         if (result != null) {
             logger.info(Constants.TOTAL + result.toString());
@@ -87,25 +88,11 @@ public class PeriodResources {
 
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.CHOICES_IN_CACHE, allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         boolean result = conversionSupport.remove(id);
         if (result) {
             return ResponseEntity.ok(Constants.DADOS_DELETADOS);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-    }
-
-    @GetMapping(path = "/find")
-    @ResponseBody
-    @Timed
-    public ResponseEntity<PeriodResponse> findByName(@RequestParam(value="name", required=false) String name) {
-        PeriodResponse result = conversionSupport.convertToFindByName(name);
-
-        if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
-            return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
         }

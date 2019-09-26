@@ -14,15 +14,18 @@ import java.util.Optional;
 public class DisciplineRequestConverter implements Converter<DisciplineRequest, Discipline> {
 
     @Autowired
-    private ProfessorRepository clientRepository;
+    private ProfessorRepository pofessorRepository;
 
     @Override
     public Discipline convert(DisciplineRequest disciplineRequest) {
-        Discipline discipline =  new Discipline();
-        discipline.setName(disciplineRequest.getName());
-        discipline.setDescription(disciplineRequest.getDescription());
-        Optional<Professor> client = clientRepository.findById(disciplineRequest.getClientId());
-        discipline.setProfessor(client.get());
-        return discipline;
+        Optional<Professor> professor = Optional.empty();
+        if (disciplineRequest.getProfessorId() != 0) {
+            professor = pofessorRepository.findById(disciplineRequest.getProfessorId());
+        }
+
+       return Discipline.builder()
+                .name(disciplineRequest.getName())
+                .description(disciplineRequest.getDescription())
+                .professor(professor.get()).build();
     }
 }

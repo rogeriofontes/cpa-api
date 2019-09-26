@@ -29,6 +29,6 @@ public class PeriodRequest implements Serializable {
 
     @Getter
     @Setter
-    private Long clientId;
+    private Long professorId;
 
 }

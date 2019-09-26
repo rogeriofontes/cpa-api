@@ -24,6 +24,7 @@ public class PeriodServiceImpl implements PeriodService {
 
 	@Autowired
 	private PeriodRepository periodRepository;
+	private Iterable<Period> itr;
 
 	@Override
 	public boolean sendInformation(Period period) {
@@ -57,14 +58,14 @@ public class PeriodServiceImpl implements PeriodService {
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.PERIODS_IN_CACHE)
 	public List<Period> listAll() {
 		Iterable<Period> itr = periodRepository.findAll();
 		return (List<Period>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.PERIODS_IN_CACHE)
 	public Page<Period> findAllPageable(Pageable pageable) {
 		return periodRepository.findAll(pageable);
 	}

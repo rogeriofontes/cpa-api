@@ -32,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student save(Student e) {
-		return studentRepository.save(e);
+	public Student save(Student student) {
+		return studentRepository.save(student);
 	}
 
 	@Override
@@ -52,19 +52,20 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	@Cacheable(Constants.STUDENTS_IN_CACHE)
 	public Optional<Student> findById(Long id) {
 		return studentRepository.findById(id);
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.STUDENTS_IN_CACHE)
 	public List<Student> listAll() {
 		Iterable<Student> itr = studentRepository.findAll();
 		return (List<Student>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.STUDENTS_IN_CACHE)
 	public Page<Student> findAllPageable(Pageable pageable) {
 		return studentRepository.findAll(pageable);
 	}

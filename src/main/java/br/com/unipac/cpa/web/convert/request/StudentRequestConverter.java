@@ -19,23 +19,24 @@ public class StudentRequestConverter implements Converter<StudentRequest, Studen
 	
 	@Override
 	public Student convert(StudentRequest source) {
-		Student client = Student.builder()
-				.name(source.getName())
-				.email(source.getEmail())
-				.mobile(source.getMobile())
-				.register(source.getRegister())
-				.build();
-		
+		Company resultCompany = null;
+
 		if (source.getCompanyId() != null && source.getCompanyId().intValue() > 0) {
 			Optional<Company> company = companyRepository.findById(source.getCompanyId());
 			if (company.isPresent()) {
-				client.setCompany(company.get());
+				resultCompany = company.get();
 			} else {
 				throw new ResourceNotFoundException("Id náo encontrado");
 			}
 		}
 
-		return client;
+		return Student.builder()
+				.name(source.getName())
+				.email(source.getEmail())
+				.mobile(source.getMobile())
+				.register(source.getRegister())
+				.company(resultCompany)
+				.build();
 	}
 
 }

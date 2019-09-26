@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `option` (
+CREATE TABLE IF NOT EXISTS `choice` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(150) NOT NULL,
   `point` varchar(150) NOT NULL,

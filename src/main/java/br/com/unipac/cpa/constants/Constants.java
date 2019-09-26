@@ -13,7 +13,7 @@ public class Constants {
 	
 	public static final String DADOS_DELETADOS = "Dados Deletados!";
 
-	public static final String CLIENTS_IN_CACHE = "clientsInCache";
+	public static final String DISCIPLINES_IN_CACHE = "disciplinesInCache";
 
 	public static final String QUESTION_IN_CACHE = "questionsInCache";
 
@@ -21,7 +21,23 @@ public class Constants {
 
 	public static final String COMPANYS_TYPES_IN_CACHE = "companysTypesInCache";
 
-	public static final String SEGMENTS_IN_CACHE = "segmentsInCache";
+	public static final String COURSES_IN_CACHE = "coursesInCache";
+
+	public static final String PERIODS_IN_CACHE = "periodsInCache";
+
+	public static final String DOCUMENT_REGIONS_IN_CACHE = "documentRegionsInCache";
+
+	public static final String LOCALS_IN_CACHE = "localsInCache";
+
+	public static final String CHOICES_IN_CACHE = "choicesInCache";
+
+	public static final String EVALUATIONS_IN_CACHE = "evaluationsInCache";
+
+	public static final String PERSON_TYPES_IN_CACHE = "personTypesInCache";
+
+	public static final String STUDENTS_IN_CACHE = "studentsInCache";
+
+	public static final String PROFESSORS_IN_CACHE = "professorsInCache";
 
 	public static final String TOTAL = "Total: ";
 

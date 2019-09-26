@@ -11,6 +11,7 @@ public class QuestionResponseConverter implements Converter<Question, QuestionRe
     @Override
     public QuestionResponse convert(Question question) {
         return QuestionResponse.builder()
+                .id(question.getId())
                 .title(question.getTitle())
                 .description(question.getDescription())
                 .evaluationId(question.getEvaluation().getId()).build();

@@ -58,14 +58,14 @@ public class DisciplineServiceImpl implements DisciplineService {
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.DISCIPLINES_IN_CACHE)
 	public List<Discipline> listAll() {
 		Iterable<Discipline> itr = disciplineRepository.findAll();
 		return (List<Discipline>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.DISCIPLINES_IN_CACHE)
 	public Page<Discipline> findAllPageable(Pageable pageable) {
 		return disciplineRepository.findAll(pageable);
 	}

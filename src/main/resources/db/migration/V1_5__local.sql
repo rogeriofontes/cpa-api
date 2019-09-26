@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS `local` (
   `last_modified_date` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+INSERT INTO `local` (`id`,`city`,`uf`,`create_by`,`created_date`,`last_modified_by`,`last_modified_date`) VALUES (1,'Uberlândia','MG','root@localhost','2001-01-01','root@localhost','2001-01-01');

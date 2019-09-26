@@ -9,9 +9,10 @@ import org.springframework.stereotype.Component;
 public class PeriodResponseConverter implements Converter<Period, PeriodResponse> {
     @Override
     public PeriodResponse convert(Period period) {
-        PeriodResponse periodResponse =  new PeriodResponse();
-        periodResponse.setName(period.getName());
-        periodResponse.setProfessor(period.getProfessor());
-        return periodResponse;
+        return PeriodResponse.builder()
+                .id(period.getId())
+                .name(period.getName())
+                .description(period.getDescription())
+                .professor(period.getProfessor()).build();
     }
 }

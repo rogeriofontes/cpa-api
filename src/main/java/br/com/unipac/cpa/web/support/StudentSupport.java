@@ -48,8 +48,8 @@ public class StudentSupport {
 		return students;
 	}
 
-	public StudentResponse convertToCreate(StudentRequest employeeRequest) {
-		Student student = conversionService.convert(employeeRequest, Student.class);
+	public StudentResponse convertToCreate(StudentRequest studentRequest) {
+		Student student = conversionService.convert(studentRequest, Student.class);
 		Student saved = studentService.save(student);
 		return getConverter(saved);
 	}

@@ -5,15 +5,16 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.awt.*;
 
 @Entity
-@Table(name = "option")
+@Table(name = "choice")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, of = { "name", "description", "professor" })
 @Builder
-public class Option extends AudityEntity {
+public class Choice extends AudityEntity {
 
     @Getter
     @Setter
@@ -22,9 +23,9 @@ public class Option extends AudityEntity {
     @Setter
     private String point;
 
-    public void update(Long id, Option option) {
+    public void update(Long id, Choice choice) {
         super.setId(id);
-        this.description = option.getDescription();
-        this.point = option.getPoint();
+        this.description = choice.getDescription();
+        this.point = choice.getPoint();
     }
 }

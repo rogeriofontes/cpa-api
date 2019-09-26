@@ -52,19 +52,20 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
+	@Cacheable(Constants.PROFESSORS_IN_CACHE)
 	public Optional<Professor> findById(Long id) {
 		return studentRepository.findById(id);
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.PROFESSORS_IN_CACHE)
 	public List<Professor> listAll() {
 		Iterable<Professor> itr = studentRepository.findAll();
 		return (List<Professor>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.PROFESSORS_IN_CACHE)
 	public Page<Professor> findAllPageable(Pageable pageable) {
 		return studentRepository.findAll(pageable);
 	}

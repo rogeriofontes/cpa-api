@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "professor_id")
     private Professor professor;
 
     public void update(Discipline discipline){

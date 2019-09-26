@@ -28,10 +28,10 @@ public class PeriodSupport {
 
     public PeriodResponse convertToFindById(Long id) {
         PeriodResponse founded = null;
-        Optional<Period> businessFront = service.findById(id);
+        Optional<Period> period = service.findById(id);
 
-        if (businessFront.isPresent()) {
-            founded = conversion.convert(businessFront.get(), PeriodResponse.class);
+        if (period.isPresent()) {
+            founded = conversion.convert(period.get(), PeriodResponse.class);
             log.info("Period: " + founded.toString());
         } else {
             throw new ResourceNotFoundException("Company Type not found");
@@ -41,19 +41,19 @@ public class PeriodSupport {
     }
 
     public PeriodResponse convertToFindByName(String name) {
-        Optional<Period> businessFront = service.findByName(name);
-        PeriodResponse founded = conversion.convert(businessFront.get(), PeriodResponse.class);
+        Optional<Period> period = service.findByName(name);
+        PeriodResponse founded = conversion.convert(period.get(), PeriodResponse.class);
         log.info("Period: " + founded.toString());
         return founded;
     }
 
     public List<PeriodResponse> list() {
-        List<PeriodResponse> businessFronts = new ArrayList<>();
-        service.listAll().forEach(businessFront -> {
-            PeriodResponse saved = conversion.convert(businessFront, PeriodResponse.class);
-            businessFronts.add(saved);
+        List<PeriodResponse> periods = new ArrayList<>();
+        service.listAll().forEach(period -> {
+            PeriodResponse saved = conversion.convert(period, PeriodResponse.class);
+            periods.add(saved);
         });
-        return businessFronts;
+        return periods;
     }
 
     public PeriodResponse convertToCreate(PeriodRequest periodRequest) {

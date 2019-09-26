@@ -1,9 +1,6 @@
 package br.com.unipac.cpa.web.resources;
 
 import br.com.unipac.cpa.constants.Constants;
-import br.com.unipac.cpa.model.domain.Option;
-import br.com.unipac.cpa.model.domain.Question;
-import br.com.unipac.cpa.model.service.QuestionService;
 import br.com.unipac.cpa.web.dto.request.QuestionRequest;
 import br.com.unipac.cpa.web.dto.response.QuestionResponse;
 import br.com.unipac.cpa.web.support.QuestionSupport;
@@ -12,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/questions")

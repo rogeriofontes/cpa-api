@@ -11,13 +11,11 @@ public class EvaluationRequestConverter implements Converter<EvaluationRequest, 
 
 	@Override
 	public Evaluation convert(EvaluationRequest source) {
-		Evaluation evaluation = Evaluation.builder()
+		return Evaluation.builder()
 				.name(source.getName())
 				.description(source.getDescription())
 				.date(DateUtil.convert(source.getDate()))
 				.build();
-		
-		return evaluation;
 	}
 
 }

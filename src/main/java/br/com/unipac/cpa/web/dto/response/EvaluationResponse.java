@@ -14,5 +14,5 @@ import java.util.Date;
 	@Getter @Setter private Long id;
 	@Getter @Setter private String name;
 	@Getter @Setter private String description;
-	@Getter @Setter private Date date;
+	@Getter @Setter private String date;
 }

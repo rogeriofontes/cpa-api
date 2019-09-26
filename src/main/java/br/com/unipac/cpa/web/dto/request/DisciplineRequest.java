@@ -29,6 +29,6 @@ public class DisciplineRequest implements Serializable {
 
     @Getter
     @Setter
-    private Long clientId;
+    private Long professorId;
 
 }

@@ -55,7 +55,7 @@ public class StudentResources {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.STUDENTS_IN_CACHE, allEntries = true)
 	public ResponseEntity<StudentResponse> add(@RequestBody StudentRequest studentRequest) {
 		StudentResponse result = studentSupport.convertToCreate(studentRequest);
 		
@@ -70,7 +70,7 @@ public class StudentResources {
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.STUDENTS_IN_CACHE, allEntries = true)
 	public ResponseEntity<StudentResponse> change(@PathVariable("id") Long id, @RequestBody StudentRequest studentRequest) {
 		StudentResponse result = studentSupport.convertToChange(id, studentRequest);
 		
@@ -85,7 +85,7 @@ public class StudentResources {
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.STUDENTS_IN_CACHE, allEntries = true)
 	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
 		boolean result = studentSupport.remove(id);
 		

@@ -55,7 +55,7 @@ public class EvaluationResources {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.EVALUATIONS_IN_CACHE, allEntries = true)
 	public ResponseEntity<EvaluationResponse> add(@RequestBody EvaluationRequest evaluationRequest) {
 		EvaluationResponse result = evaluationSupport.convertToCreate(evaluationRequest);
 		
@@ -70,7 +70,7 @@ public class EvaluationResources {
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.EVALUATIONS_IN_CACHE, allEntries = true)
 	public ResponseEntity<EvaluationResponse> change(@PathVariable("id") Long id, @RequestBody EvaluationRequest evaluationRequest) {
 		EvaluationResponse result = evaluationSupport.convertToChange(id, evaluationRequest);
 		
@@ -85,7 +85,7 @@ public class EvaluationResources {
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.EVALUATIONS_IN_CACHE, allEntries = true)
 	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
 		boolean result = evaluationSupport.remove(id);
 		

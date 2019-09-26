@@ -57,7 +57,7 @@ public class ProfessorResources {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.PROFESSORS_IN_CACHE, allEntries = true)
 	public ResponseEntity<ProfessorResponse> add(@RequestBody ProfessorRequest professorRequest) {
 		ProfessorResponse result = professorSupport.convertToCreate(professorRequest);
 		
@@ -72,7 +72,7 @@ public class ProfessorResources {
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.PROFESSORS_IN_CACHE, allEntries = true)
 	public ResponseEntity<ProfessorResponse> change(@PathVariable("id") Long id, @RequestBody ProfessorRequest professorRequest) {
 		ProfessorResponse result = professorSupport.convertToChange(id, professorRequest);
 		
@@ -87,7 +87,7 @@ public class ProfessorResources {
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
-	@CacheEvict(value = Constants.CLIENTS_IN_CACHE, allEntries = true)
+	@CacheEvict(value = Constants.PROFESSORS_IN_CACHE, allEntries = true)
 	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
 		boolean result = professorSupport.remove(id);
 		

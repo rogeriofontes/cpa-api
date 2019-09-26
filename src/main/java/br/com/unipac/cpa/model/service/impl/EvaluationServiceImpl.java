@@ -52,19 +52,20 @@ public class EvaluationServiceImpl implements EvaluationService {
 	}
 
 	@Override
+	@Cacheable(Constants.EVALUATIONS_IN_CACHE)
 	public Optional<Evaluation> findById(Long id) {
 		return evaluationRepository.findById(id);
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.EVALUATIONS_IN_CACHE)
 	public List<Evaluation> listAll() {
 		Iterable<Evaluation> itr = evaluationRepository.findAll();
 		return (List<Evaluation>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.CLIENTS_IN_CACHE)
+	@Cacheable(Constants.EVALUATIONS_IN_CACHE)
 	public Page<Evaluation> findAllPageable(Pageable pageable) {
 		return evaluationRepository.findAll(pageable);
 	}

@@ -51,13 +51,13 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	@Cacheable(Constants.SEGMENTS_IN_CACHE)
+	@Cacheable(Constants.COURSES_IN_CACHE)
 	public List<Course> listAll() {
 		return courseRepository.findAll();
 	}
 
 	@Override
-	@Cacheable(Constants.SEGMENTS_IN_CACHE)
+	@Cacheable(Constants.COURSES_IN_CACHE)
 	public Page<Course> findAllPageable(Pageable pageable) {
 		return courseRepository.findAll(pageable);
 	}

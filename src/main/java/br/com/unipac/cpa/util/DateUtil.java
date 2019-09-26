@@ -41,4 +41,9 @@ public class DateUtil {
 		return null;
 	}
 
+	public static String convertDate(Date date) {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+		return formatter.format(date);
+	}
+
 }
