@@ -26,6 +26,9 @@ public class DisciplineRequestConverter implements Converter<DisciplineRequest, 
        return Discipline.builder()
                 .name(disciplineRequest.getName())
                 .description(disciplineRequest.getDescription())
-                .professor(professor.get()).build();
+                .professor(professor.get())
+                .professors(disciplineRequest.getProfessors())
+                .students(disciplineRequest.getStudents())
+                .build();
     }
 }
