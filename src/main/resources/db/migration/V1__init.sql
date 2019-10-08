@@ -1,3 +1,5 @@
+--ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_ROOT_USER_PASSWORD';
+
 create table `user` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`email` varchar(255) NOT NULL, 
