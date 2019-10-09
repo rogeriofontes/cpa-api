@@ -29,9 +29,9 @@ public class CompanyType extends AudityEntity {
 	@Setter
 	private String name;
 
-	public void updade(Long id, CompanyType clientType) {
+	public void updade(Long id, CompanyType companyType) {
 		super.setId(id);
-		this.name = clientType.getName();
+		this.name = companyType.getName();
 	}
 
 }

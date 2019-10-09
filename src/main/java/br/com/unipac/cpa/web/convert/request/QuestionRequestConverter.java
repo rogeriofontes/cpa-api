@@ -1,7 +1,6 @@
 package br.com.unipac.cpa.web.convert.request;
 
 import br.com.unipac.cpa.model.domain.Evaluation;
-import br.com.unipac.cpa.model.domain.Option;
 import br.com.unipac.cpa.model.domain.Question;
 import br.com.unipac.cpa.model.repository.EvaluationRepository;
 import br.com.unipac.cpa.model.repository.QuestionRepository;
