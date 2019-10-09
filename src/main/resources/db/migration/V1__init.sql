@@ -12,7 +12,7 @@ create table `user` (
 
 insert into user (id, email, password) values (1, 'fontestz@gmail.com', '$2a$10$4q2I1/BSLFOx64ji5oDz2uH.ZLOtQFi9N821ILDmjxO7wgt/gagnS');
 insert into user (id, email, password) values (2, 'jmessias@gmail.com', '$2a$10$4q2I1/BSLFOx64ji5oDz2uH.ZLOtQFi9N821ILDmjxO7wgt/gagnS');
-insert into user (id, email, password) values (3, 'ioliveira@gmail.com', '$2a$10$4q2I1/BSLFOx64ji5oDz2uH.ZLOtQFi9N821ILDmjxO7wgt/gagnS');
+insert into user (id, email, password) values (3, 'iagoiveira@gmail.com', '$2a$10$4q2I1/BSLFOx64ji5oDz2uH.ZLOtQFi9N821ILDmjxO7wgt/gagnS');
 
 
 create table `role` (
