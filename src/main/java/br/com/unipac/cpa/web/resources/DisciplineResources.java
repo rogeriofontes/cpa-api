@@ -1,6 +1,7 @@
 package br.com.unipac.cpa.web.resources;
 
 import br.com.unipac.cpa.constants.Constants;
+import br.com.unipac.cpa.model.domain.Discipline;
 import br.com.unipac.cpa.web.dto.request.DisciplineRequest;
 import br.com.unipac.cpa.web.dto.response.DisciplineResponse;
 import br.com.unipac.cpa.web.support.DisciplineSupport;

@@ -13,6 +13,6 @@ public class PeriodResponseConverter implements Converter<Period, PeriodResponse
                 .id(period.getId())
                 .name(period.getName())
                 .description(period.getDescription())
-                .professor(period.getProfessor()).build();
+                .courseId(period.getCourse().getId()).build();
     }
 }

@@ -1,34 +1,47 @@
 package br.com.unipac.cpa.web.convert.request;
 
+import br.com.unipac.cpa.model.domain.Course;
 import br.com.unipac.cpa.model.domain.Discipline;
+import br.com.unipac.cpa.model.domain.Period;
 import br.com.unipac.cpa.model.domain.Professor;
+import br.com.unipac.cpa.model.repository.CourseRepository;
+import br.com.unipac.cpa.model.repository.PeriodRepository;
 import br.com.unipac.cpa.model.repository.ProfessorRepository;
 import br.com.unipac.cpa.web.dto.request.DisciplineRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Optional;
 
 @Component
 public class DisciplineRequestConverter implements Converter<DisciplineRequest, Discipline> {
 
     @Autowired
-    private ProfessorRepository pofessorRepository;
+    private PeriodRepository periodRepository;
 
     @Override
     public Discipline convert(DisciplineRequest disciplineRequest) {
-        Optional<Professor> professor = Optional.empty();
-        if (disciplineRequest.getProfessorId() != 0) {
-            professor = pofessorRepository.findById(disciplineRequest.getProfessorId());
+        Optional<Period> period = Optional.empty();
+        if (disciplineRequest.getPeriodId() != 0) {
+            period = periodRepository.findById(disciplineRequest.getPeriodId());
         }
 
-       return Discipline.builder()
+       Discipline discipline = Discipline.builder()
                 .name(disciplineRequest.getName())
                 .description(disciplineRequest.getDescription())
-                .professor(professor.get())
-                .professors(disciplineRequest.getProfessors())
-                .students(disciplineRequest.getStudents())
+                .period(period.get())
                 .build();
+
+        /*if (disciplineRequest.getProfessors() != null && disciplineRequest.getProfessors().size() > 0) {
+            discipline.setProfessors(disciplineRequest.getProfessors());
+        }
+
+        if (disciplineRequest.getProfessors() != null && disciplineRequest.getProfessors().size() > 0) {
+            discipline.setStudents(disciplineRequest.getStudents());
+        }*/
+
+        return  discipline;
     }
 }

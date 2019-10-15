@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "period")
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "name", "description", "professor" })
+@ToString(callSuper = true, of = { "name", "description", "course" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,12 +31,12 @@ import javax.validation.constraints.NotNull;
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "professor_id")
-    private Professor professor;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public void update(Period period){
         this.name = period.getName();
         this.description = period.getDescription();
-        this.professor = period.getProfessor();
+        this.course = period.getCourse();
     }
 }

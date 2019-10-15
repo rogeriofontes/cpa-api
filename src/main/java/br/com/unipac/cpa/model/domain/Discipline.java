@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "discipline")
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "name", "description", "professor" })
+@ToString(callSuper = true, of = { "name", "description", "course" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,8 +29,8 @@ import java.util.Set;
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "professor_id")
-    private Professor professor;
+    @JoinColumn(name = "period_id")
+    private Period period;
 
     @Getter
     @Setter
@@ -51,6 +51,6 @@ import java.util.Set;
     public void update(Discipline discipline){
         this.name = discipline.getName();
         this.description = discipline.getDescription();
-        this.professor = discipline.getProfessor();
+        this.period = discipline.getPeriod();
     }
 }

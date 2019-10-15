@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "roleName", "user" })
+@ToString(callSuper = true, of = { "role" })
 @Data
 public class Role extends AudityEntity {
 

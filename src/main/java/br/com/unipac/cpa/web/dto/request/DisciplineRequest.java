@@ -32,14 +32,13 @@ public class DisciplineRequest implements Serializable {
 
     @Getter
     @Setter
-    private Long professorId;
+    private Long periodId;
 
-    @Getter
-    @Setter
-    private Set<Professor> professors;
+   // @Getter
+   // @Setter
+    //private Set<Professor> professors;
 
-    @Getter
-    @Setter
-    private Set<Student> students;
-
+   // @Getter
+  //  @Setter
+   // private Set<Student> students;
 }

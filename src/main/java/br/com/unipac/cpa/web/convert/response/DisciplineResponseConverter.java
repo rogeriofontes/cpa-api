@@ -13,6 +13,6 @@ public class DisciplineResponseConverter implements Converter<Discipline, Discip
                 .id(discipline.getId())
                 .name(discipline.getName())
                 .description(discipline.getDescription())
-                .professor(discipline.getProfessor()).build();
+                .periodId(discipline.getPeriod().getId()).build();
     }
 }
