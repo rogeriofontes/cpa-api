@@ -1,7 +1,11 @@
 package br.com.unipac.cpa.web.dto.request;
 
+import br.com.unipac.cpa.model.domain.Discipline;
+import br.com.unipac.cpa.model.domain.Student;
 import lombok.*;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -11,24 +15,17 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString
 @Data
-public class PeriodRequest implements Serializable {
+public class StudentDisciplineRequest implements Serializable {
     private static final long serialVersionUID = 1968617978307583893L;
 
     @Getter
     @Setter
     private Long id;
-
-    @NotNull
     @Getter
     @Setter
-    private String name;
-
+    private Long disciplineId;
     @Getter
     @Setter
-    private int representationNumber;
-
-    @Getter
-    @Setter
-    private Long courseId;
+    private Long studentId;
 
 }

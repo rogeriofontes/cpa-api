@@ -20,7 +20,7 @@ public class BusinessFrontRequestConverter implements Converter<PeriodRequest, P
     public Period convert(PeriodRequest periodRequest) {
         Period period =  new Period();
         period.setName(periodRequest.getName());
-        period.setDescription(periodRequest.getDescription());
+        //period.setDescription(periodRequest.getDescription());
         //Optional<Professor> client = clientRepository.findById(periodRequest.getProfessorId());
         //period.setProfessor(client.get());
         return period;

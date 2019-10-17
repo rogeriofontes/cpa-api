@@ -12,6 +12,7 @@ public class ChoiceResponseConverter implements Converter<Choice, ChoiceResponse
         return ChoiceResponse.builder()
                 .id(choice.getId())
                 .description(choice.getDescription())
+                .likertSkalaId(choice.getLikertSkala().getId())
                 .point(choice.getPoint()).build();
     }
 }

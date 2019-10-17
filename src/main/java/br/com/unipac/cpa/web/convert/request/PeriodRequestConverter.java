@@ -30,7 +30,7 @@ public class PeriodRequestConverter implements Converter<PeriodRequest, Period> 
 
         return Period.builder()
                 .name(periodRequest.getName())
-                .description(periodRequest.getDescription())
+                .representationNumber(periodRequest.getRepresentationNumber())
                 .course(course.get()).build();
     }
 }

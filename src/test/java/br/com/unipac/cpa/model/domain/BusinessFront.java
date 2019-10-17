@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
 
     public void update(Period period){
         this.name = period.getName();
-        this.description = period.getDescription();
+        //this.description = period.getDescription();
         //this.professor = period.ge;
     }
 }

@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS `choice` (
+CREATE TABLE IF NOT EXISTS student_discipline(
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `description` varchar(150) NOT NULL,
-  `point` varchar(150) NOT NULL,
+  `student_id` bigint(20) NOT NULL,
+  `discipline_id` bigint(20) NOT NULL,
   `create_by` varchar(255) NOT NULL DEFAULT 'system_user',
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_modified_by` varchar(255),

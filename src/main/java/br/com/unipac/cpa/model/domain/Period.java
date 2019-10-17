@@ -2,16 +2,13 @@ package br.com.unipac.cpa.model.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "period")
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "name", "description", "course" })
+@ToString(callSuper = true, of = { "name", "representationNumber", "course" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +23,8 @@ import javax.validation.constraints.NotNull;
 
     @Getter
     @Setter
-    private String description;
+    @Column(name = "representation_number")
+    private int representationNumber;
 
     @Getter
     @Setter
@@ -36,7 +34,7 @@ import javax.validation.constraints.NotNull;
 
     public void update(Period period){
         this.name = period.getName();
-        this.description = period.getDescription();
+        this.representationNumber = period.getRepresentationNumber();
         this.course = period.getCourse();
     }
 }

@@ -1,6 +1,5 @@
 package br.com.unipac.cpa.web.dto.response;
 
-import br.com.unipac.cpa.model.domain.Professor;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString
 @Data
-public class PeriodResponse implements Serializable {
+public class LikertSkalaResponse implements Serializable {
 
     @Getter
     @Setter
@@ -22,12 +21,4 @@ public class PeriodResponse implements Serializable {
     @Getter
     @Setter
     private String name;
-
-    @Getter
-    @Setter
-    private int representationNumber;
-
-    @Getter
-    @Setter
-    private Long courseId;
 }
