@@ -5,7 +5,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString(callSuper = true, of = { "name", "description", "date" })
+@ToString(callSuper = true, of = { "title", "description", "evaluationId" })
 @Builder
 public class QuestionResponse {
 

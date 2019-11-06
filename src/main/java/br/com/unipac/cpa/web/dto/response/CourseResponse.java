@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString(callSuper = true, of = { "name", "code" })
+@ToString(callSuper = true, of = { "name", "companyId" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
