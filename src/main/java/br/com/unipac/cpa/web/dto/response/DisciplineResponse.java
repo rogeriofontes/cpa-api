@@ -1,5 +1,6 @@
 package br.com.unipac.cpa.web.dto.response;
 
+import br.com.unipac.cpa.model.domain.Course;
 import br.com.unipac.cpa.model.domain.Professor;
 import lombok.*;
 
@@ -29,5 +30,5 @@ public class DisciplineResponse implements Serializable {
 
     @Getter
     @Setter
-    private Professor professor;
+    private Long periodId;
 }

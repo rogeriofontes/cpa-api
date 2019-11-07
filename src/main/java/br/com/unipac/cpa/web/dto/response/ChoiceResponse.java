@@ -16,5 +16,8 @@ public class ChoiceResponse {
     private String description;
     @Getter
     @Setter
-    private String point;
+    private int point;
+    @Getter
+    @Setter
+    private Long likertSkalaId;
 }

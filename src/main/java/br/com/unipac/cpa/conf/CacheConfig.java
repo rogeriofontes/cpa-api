@@ -94,14 +94,10 @@ public class CacheConfig {
 				Caffeine.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES).maximumSize(Constants.MAXIMUM_SIZE).build());
 	}
 
-
-
-
-
-
-
-
-
-
+	@Bean
+	public CaffeineCache likertSkalasCache() {
+		return new CaffeineCache(Constants.LIKERT_SKALA_IN_CACHE,
+				Caffeine.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES).maximumSize(Constants.MAXIMUM_SIZE).build());
+	}
 
 }

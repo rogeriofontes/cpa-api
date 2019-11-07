@@ -25,9 +25,9 @@ public class PeriodResponse implements Serializable {
 
     @Getter
     @Setter
-    private String description;
+    private int representationNumber;
 
     @Getter
     @Setter
-    private Professor professor;
+    private Long courseId;
 }

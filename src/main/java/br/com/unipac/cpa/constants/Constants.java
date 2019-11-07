@@ -39,6 +39,8 @@ public class Constants {
 
 	public static final String PROFESSORS_IN_CACHE = "professorsInCache";
 
+	public static final String LIKERT_SKALA_IN_CACHE = "likertSkalasInCache";
+
 	public static final String TOTAL = "Total: ";
 
 	public static final int MAXIMUM_SIZE = 100;

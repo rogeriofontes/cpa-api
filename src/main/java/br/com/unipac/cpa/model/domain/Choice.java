@@ -4,6 +4,8 @@ package br.com.unipac.cpa.model.domain;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.awt.*;
 
@@ -21,7 +23,13 @@ public class Choice extends AudityEntity {
     private String description;
     @Getter
     @Setter
-    private String point;
+    private int point;
+
+    @ManyToOne
+    @JoinColumn(name = "likert_skala_id")
+    @Getter
+    @Setter
+    private LikertSkala likertSkala;
 
     public void update(Long id, Choice choice) {
         super.setId(id);

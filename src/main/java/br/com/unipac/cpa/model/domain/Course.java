@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "course")
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "name", "code" })
+@ToString(callSuper = true, of = { "name", "company" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

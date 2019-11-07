@@ -25,10 +25,10 @@ public class PeriodRequest implements Serializable {
 
     @Getter
     @Setter
-    private String description;
+    private int representationNumber;
 
     @Getter
     @Setter
-    private Long professorId;
+    private Long courseId;
 
 }

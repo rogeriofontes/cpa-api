@@ -48,12 +48,12 @@ public class DisciplineSupport {
     }
 
     public List<DisciplineResponse> list() {
-        List<DisciplineResponse> businessFronts = new ArrayList<>();
-        service.listAll().forEach(businessFront -> {
-            DisciplineResponse saved = conversion.convert(businessFront, DisciplineResponse.class);
-            businessFronts.add(saved);
+        List<DisciplineResponse> disciplines = new ArrayList<>();
+        service.listAll().forEach(discipline -> {
+            DisciplineResponse saved = conversion.convert(discipline, DisciplineResponse.class);
+            disciplines.add(saved);
         });
-        return businessFronts;
+        return disciplines;
     }
 
     public DisciplineResponse convertToCreate(DisciplineRequest disciplineRequest) {
