@@ -17,7 +17,6 @@ public class ResponseResponseConverter implements Converter<Response, ResponseRe
                 .description(response.getDescription())
                 .questionId(response.getQuestion().getId())
                 .choiceId(response.getChoice().getId())
-                .studentId(response.getStudent().getId())
                 .professorDisciplineId(response.getProfessorDiscipline().getId())
                 .studentDisciplineId(response.getStudentDiscipline().getId()).build();
     }

@@ -3,6 +3,7 @@ package br.com.unipac.cpa.web.resources;
 import java.util.List;
 
 import br.com.unipac.cpa.web.support.UserSupport;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,10 @@ import com.codahale.metrics.annotation.Timed;
 
 import br.com.unipac.cpa.web.dto.response.UserResponse;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserResource {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserSupport userSupport;
@@ -30,7 +30,7 @@ public class UserResource {
 		UserResponse user = userSupport.findUserByUsername(username);
 
 		if (user != null) {
-			logger.info("Total Retornado: " + user.toString());
+			log.info("Total Retornado: " + user.toString());
 			return ResponseEntity.ok(user);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -44,7 +44,7 @@ public class UserResource {
 		List<UserResponse> users = userSupport.list();
 
 		if (users != null) {
-			logger.info("Total Retornado: " + users.size());
+			log.info("Total Retornado: " + users.size());
 			return ResponseEntity.ok(users);
 		} else {
 			return ResponseEntity.noContent().build();

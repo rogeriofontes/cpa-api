@@ -12,6 +12,7 @@ import br.com.unipac.cpa.model.domain.Role;
 import br.com.unipac.cpa.model.domain.User;
 import br.com.unipac.cpa.model.repository.UserRepository;
 import br.com.unipac.cpa.model.service.CustomUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @Qualifier("customUserDetailsService")
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService, UserDetailsService {

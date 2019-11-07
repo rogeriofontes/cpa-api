@@ -8,6 +8,7 @@ import br.com.unipac.cpa.model.domain.Professor;
 import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.repository.ProfessorRepository;
 import br.com.unipac.cpa.model.service.ProfessorService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +18,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ProfessorRepository studentRepository;
 
 	@Override
 	public boolean sendInformation(Professor professor) {
-		logger.info("Saved: " + !StringUtils.isEmpty(professor.toString()));
+		log.info("Saved: " + !StringUtils.isEmpty(professor.toString()));
 		return false;
 	}
 

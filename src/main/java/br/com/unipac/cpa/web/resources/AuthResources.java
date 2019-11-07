@@ -4,12 +4,14 @@ import javax.servlet.ServletException;
 
 import br.com.unipac.cpa.web.dto.request.LoginRequest;
 import br.com.unipac.cpa.web.support.AuthSupport;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.unipac.cpa.model.dto.TokenResult;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthResources {

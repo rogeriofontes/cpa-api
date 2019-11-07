@@ -34,9 +34,6 @@ public class ResponseRequest implements Serializable {
     private Long choiceId;
     @Getter
     @Setter
-    private Long studentId;
-    @Getter
-    @Setter
     private Long professorDisciplineId;
     @Getter
     @Setter

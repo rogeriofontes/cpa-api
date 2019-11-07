@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS `response` (
   `description` varchar(1500) NOT NULL,
   `question_id` bigint(20) NOT NULL,
   `choice_id` bigint(20) NOT NULL,
-  `student_id` bigint(20) NOT NULL,
   `professor_discipline_id` bigint(20) NOT NULL,
   `student_discipline_id` bigint(20) NOT NULL,
   `create_by` varchar(255) NOT NULL DEFAULT 'system_user',

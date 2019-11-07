@@ -5,8 +5,7 @@ import java.util.List;
 import br.com.unipac.cpa.web.support.ProfessorSupport;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.request.ProfessorRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
@@ -17,12 +16,11 @@ import com.codahale.metrics.annotation.Timed;
 
 import br.com.unipac.cpa.web.dto.response.ProfessorResponse;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/professors")
 public class ProfessorResources {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private ProfessorSupport professorSupport;
 
@@ -33,7 +31,7 @@ public class ProfessorResources {
 		List<ProfessorResponse> result = professorSupport.list();
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.size());
+			log.info(Constants.TOTAL + result.size());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -47,7 +45,7 @@ public class ProfessorResources {
 		ProfessorResponse result = professorSupport.convertToFindById(id);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -62,7 +60,7 @@ public class ProfessorResources {
 		ProfessorResponse result = professorSupport.convertToCreate(professorRequest);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -77,7 +75,7 @@ public class ProfessorResources {
 		ProfessorResponse result = professorSupport.convertToChange(id, professorRequest);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -105,7 +103,7 @@ public class ProfessorResources {
 		ProfessorResponse result = professorSupport.convertToFindByName(name);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();

@@ -8,6 +8,7 @@ import br.com.unipac.cpa.web.support.CourseSupport;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.request.CourseRequest;
 import br.com.unipac.cpa.web.dto.response.CourseResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.codahale.metrics.annotation.Timed;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/courses")
 public class CourseResources {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private CourseSupport conversionSupport;
@@ -34,7 +34,7 @@ public class CourseResources {
 		List<CourseResponse> courseRequests = conversionSupport.list();
 
 		if (courseRequests != null) {
-			logger.info(Constants.TOTAL + courseRequests.size());
+			log.info(Constants.TOTAL + courseRequests.size());
 			return ResponseEntity.ok(courseRequests);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -48,7 +48,7 @@ public class CourseResources {
 		CourseResponse result = conversionSupport.convertToFindById(id);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -63,7 +63,7 @@ public class CourseResources {
 		CourseResponse result = conversionSupport.convertToCreate(courseRequest);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -78,7 +78,7 @@ public class CourseResources {
 												 @RequestBody CourseRequest courseRequest) {
 		CourseResponse result = conversionSupport.convertToChange(id, courseRequest);
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -105,7 +105,7 @@ public class CourseResources {
 		CourseResponse result = conversionSupport.convertToFindByName(name);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();

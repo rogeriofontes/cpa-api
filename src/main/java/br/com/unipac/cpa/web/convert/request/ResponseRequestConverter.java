@@ -23,9 +23,6 @@ public class ResponseRequestConverter implements Converter<ResponseRequest, Resp
     private ChoiceRepository choiceRepository;
 
     @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
     private ProfessorDisciplineRepository professorDisciplineRepository;
 
     @Autowired
@@ -55,13 +52,6 @@ public class ResponseRequestConverter implements Converter<ResponseRequest, Resp
             choice = choiceRepository.findById(responseRequest.getChoiceId());
             if (choice.isPresent()) {
                 response.setChoice(choice.get());
-            }
-        }
-
-        if (responseRequest.getStudentId() != null && responseRequest.getStudentId().intValue() > 0) {
-            student = studentRepository.findById(responseRequest.getStudentId());
-            if (student.isPresent()) {
-                response.setStudent(student.get());
             }
         }
 

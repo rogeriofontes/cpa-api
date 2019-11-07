@@ -33,12 +33,6 @@ public class Response extends AudityEntity {
     @Setter
     private Choice choice;
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    @Getter
-    @Setter
-    private Student student;
-
-    @ManyToOne
     @JoinColumn(name = "professor_discipline_id")
     @Getter
     @Setter

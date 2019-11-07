@@ -7,6 +7,7 @@ import br.com.unipac.cpa.model.service.PasswordCrypto;
 import br.com.unipac.cpa.model.service.UserService;
 import br.com.unipac.cpa.web.dto.request.UserRequest;
 import br.com.unipac.cpa.web.dto.response.UserResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 

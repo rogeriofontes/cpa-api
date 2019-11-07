@@ -5,6 +5,7 @@ import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Student;
 import br.com.unipac.cpa.model.repository.StudentRepository;
 import br.com.unipac.cpa.model.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +18,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class StudentServiceImpl implements StudentService {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private StudentRepository studentRepository;
 
 	@Override
 	public boolean sendInformation(Student student) {
-		logger.info("Saved: " + !StringUtils.isEmpty(student.toString()));
+		log.info("Saved: " + !StringUtils.isEmpty(student.toString()));
 		return false;
 	}
 

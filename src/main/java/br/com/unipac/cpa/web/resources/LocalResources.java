@@ -4,6 +4,7 @@ import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.response.LocalResponse;
 import br.com.unipac.cpa.web.support.LocalSupport;
 import com.codahale.metrics.annotation.Timed;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/v1/locals")
 public class LocalResources  {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private LocalSupport localSupport;
@@ -31,7 +31,7 @@ public class LocalResources  {
         List<LocalResponse> dtos = localSupport.get();
 
         if (dtos != null) {
-            logger.info(Constants.TOTAL + dtos.size());
+            log.info(Constants.TOTAL + dtos.size());
             return ResponseEntity.ok(dtos);
         } else {
             return ResponseEntity.noContent().build();
