@@ -5,6 +5,7 @@ import br.com.unipac.cpa.model.domain.StudentDiscipline;
 import br.com.unipac.cpa.model.service.StudentDisciplineService;
 import br.com.unipac.cpa.web.dto.request.StudentDisciplineRequest;
 import br.com.unipac.cpa.web.dto.response.StudentDisciplineResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class StudentDisciplineSupport {
-
-    private static final Logger log = LogManager.getLogger(StudentDisciplineSupport.class);
 
     @Autowired
     private StudentDisciplineService service;

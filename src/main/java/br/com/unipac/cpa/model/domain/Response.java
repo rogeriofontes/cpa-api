@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, of = { "title", "description", "question", "choice", "student", "professorDiscipline", "studentDiscipline" })
+@ToString(callSuper = true, of = { "title", "description", "question", "choice", "professorDiscipline", "studentDiscipline" })
 @Builder
 public class Response extends AudityEntity {
 
@@ -51,7 +51,6 @@ public class Response extends AudityEntity {
        this.description = response.getDescription();
        this.question = response.getQuestion();
        this.choice = response.getChoice();
-       this.student = response.getStudent();
        this.studentDiscipline = response.getStudentDiscipline();
        this.professorDiscipline = response.getProfessorDiscipline();
     }

@@ -58,7 +58,7 @@ public class ProfessorDisciplineResources {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.PROFESSORS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<ProfessorDisciplineResponse> add(@Valid @RequestBody ProfessorDisciplineRequest professorDisciplineRequest) {
         ProfessorDisciplineResponse result = conversionSupport.convertToCreate(professorDisciplineRequest);
 
@@ -74,7 +74,7 @@ public class ProfessorDisciplineResources {
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.PROFESSORS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<ProfessorDisciplineResponse> change(@PathVariable Long id, @RequestBody ProfessorDisciplineRequest professorDisciplineRequest) {
         ProfessorDisciplineResponse result = conversionSupport.convertToChange(id, professorDisciplineRequest);
 
@@ -88,7 +88,7 @@ public class ProfessorDisciplineResources {
 
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.PROFESSORS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         boolean result = conversionSupport.remove(id);
         if (result) {

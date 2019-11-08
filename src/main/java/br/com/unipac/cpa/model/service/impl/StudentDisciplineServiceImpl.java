@@ -24,6 +24,7 @@ public class StudentDisciplineServiceImpl implements StudentDisciplineService {
 
 	@Autowired
 	private StudentDisciplineRepository studentDisciplineRepository;
+
 	private Iterable<StudentDiscipline> itr;
 
 	@Override
@@ -52,14 +53,14 @@ public class StudentDisciplineServiceImpl implements StudentDisciplineService {
 	}
 
 	@Override
-	@Cacheable(Constants.PERIODS_IN_CACHE)
+	@Cacheable(Constants.STUDENTS_DISCIPLINE_IN_CACHE)
 	public List<StudentDiscipline> listAll() {
 		Iterable<StudentDiscipline> itr = studentDisciplineRepository.findAll();
 		return (List<StudentDiscipline>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.PERIODS_IN_CACHE)
+	@Cacheable(Constants.STUDENTS_DISCIPLINE_IN_CACHE)
 	public Page<StudentDiscipline> findAllPageable(Pageable pageable) {
 		return studentDisciplineRepository.findAll(pageable);
 	}
