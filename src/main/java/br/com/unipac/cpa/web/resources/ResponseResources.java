@@ -5,6 +5,7 @@ import br.com.unipac.cpa.web.dto.request.ResponseRequest;
 import br.com.unipac.cpa.web.dto.response.ResponseResponse;
 import br.com.unipac.cpa.web.support.ResponseSupport;
 import com.codahale.metrics.annotation.Timed;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/v1/responses")
 public class ResponseResources {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ResponseSupport conversionSupport;
@@ -30,11 +31,11 @@ public class ResponseResources {
     @ResponseBody
     @Timed
     public ResponseEntity<?> getAll() {
-        logger.info("teste");
+        log.info("teste");
         List<ResponseResponse> result = conversionSupport.list();
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.size());
+            log.info(Constants.TOTAL + result.size());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
@@ -48,7 +49,7 @@ public class ResponseResources {
         ResponseResponse result = conversionSupport.convertToFindById(id);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
@@ -62,7 +63,7 @@ public class ResponseResources {
         ResponseResponse result = conversionSupport.convertToCreate(responseRequest);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId())
                     .toUri();
             return ResponseEntity.created(location).body(result);
@@ -78,7 +79,7 @@ public class ResponseResources {
         ResponseResponse result = conversionSupport.convertToChange(id, responseRequest);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();

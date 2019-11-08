@@ -5,6 +5,7 @@ import br.com.unipac.cpa.web.dto.request.StudentDisciplineRequest;
 import br.com.unipac.cpa.web.dto.response.StudentDisciplineResponse;
 import br.com.unipac.cpa.web.support.StudentDisciplineSupport;
 import com.codahale.metrics.annotation.Timed;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/v1/student-disciplines")
 public class StudentDisciplineResources {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private StudentDisciplineSupport conversionSupport;
@@ -30,11 +31,11 @@ public class StudentDisciplineResources {
     @ResponseBody
     @Timed
     public ResponseEntity<?> getAll() {
-        logger.info("teste");
+        log.info("teste");
         List<StudentDisciplineResponse> result = conversionSupport.list();
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.size());
+            log.info(Constants.TOTAL + result.size());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
@@ -48,7 +49,7 @@ public class StudentDisciplineResources {
         StudentDisciplineResponse result = conversionSupport.convertToFindById(id);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
@@ -57,12 +58,12 @@ public class StudentDisciplineResources {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.STUDENTS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<StudentDisciplineResponse> add(@Valid @RequestBody StudentDisciplineRequest studentDisciplineRequest) {
         StudentDisciplineResponse result = conversionSupport.convertToCreate(studentDisciplineRequest);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId())
                     .toUri();
             return ResponseEntity.created(location).body(result);
@@ -73,12 +74,12 @@ public class StudentDisciplineResources {
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.STUDENTS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<StudentDisciplineResponse> change(@PathVariable Long id, @RequestBody StudentDisciplineRequest studentDisciplineRequest) {
         StudentDisciplineResponse result = conversionSupport.convertToChange(id, studentDisciplineRequest);
 
         if (result != null) {
-            logger.info(Constants.TOTAL + result.toString());
+            log.info(Constants.TOTAL + result.toString());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.noContent().build();
@@ -87,7 +88,7 @@ public class StudentDisciplineResources {
 
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
-    @CacheEvict(value = Constants.PERIODS_IN_CACHE, allEntries = true)
+    @CacheEvict(value = Constants.STUDENTS_DISCIPLINE_IN_CACHE, allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         boolean result = conversionSupport.remove(id);
         if (result) {

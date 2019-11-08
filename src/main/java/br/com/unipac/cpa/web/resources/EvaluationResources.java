@@ -5,6 +5,7 @@ import br.com.unipac.cpa.web.dto.request.EvaluationRequest;
 import br.com.unipac.cpa.web.dto.response.EvaluationResponse;
 import br.com.unipac.cpa.web.support.EvaluationSupport;
 import com.codahale.metrics.annotation.Timed;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/evaluations")
 public class EvaluationResources {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private EvaluationSupport evaluationSupport;
 
@@ -31,7 +31,7 @@ public class EvaluationResources {
 		List<EvaluationResponse> result = evaluationSupport.list();
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.size());
+			log.info(Constants.TOTAL + result.size());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -45,7 +45,7 @@ public class EvaluationResources {
 		EvaluationResponse result = evaluationSupport.convertToFindById(id);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -60,7 +60,7 @@ public class EvaluationResources {
 		EvaluationResponse result = evaluationSupport.convertToCreate(evaluationRequest);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -75,7 +75,7 @@ public class EvaluationResources {
 		EvaluationResponse result = evaluationSupport.convertToChange(id, evaluationRequest);
 		
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -103,7 +103,7 @@ public class EvaluationResources {
 		EvaluationResponse result = evaluationSupport.convertToFindByName(name);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();

@@ -2,6 +2,7 @@ package br.com.unipac.cpa.web.resources;
 
 import br.com.unipac.cpa.model.domain.User;
 import br.com.unipac.cpa.web.dto.request.AccountRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,10 @@ import com.codahale.metrics.annotation.Timed;
 
 import br.com.unipac.cpa.model.service.AccountService;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/register")
 public class AccountResources {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private AccountService accountService;
@@ -31,7 +31,7 @@ public class AccountResources {
     @ResponseBody
     @Timed
 	public ResponseEntity<Boolean> register(@RequestBody AccountRequest accountRequest) {
-        logger.info("Account Service: " + accountRequest);
+        log.info("Account Service: " + accountRequest);
         User user = accountRequestConverter.convert(accountRequest, User.class);
         boolean registered = accountService.register(user);
     	return new ResponseEntity<>(true, HttpStatus.CREATED);

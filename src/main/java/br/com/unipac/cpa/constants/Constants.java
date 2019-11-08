@@ -45,6 +45,10 @@ public class Constants {
 
 	public static final int MAXIMUM_SIZE = 100;
 
+    public static final String STUDENTS_DISCIPLINE_IN_CACHE = "studentInDisciplinesInCache";
+
+	public static final String PROFESSORS_DISCIPLINE_IN_CACHE = "professorInDisciplinesInCache";
+
 	private Constants() {
 		throw new NotImplementationConstructionException("Classe não pode ser instanciada");
 	}

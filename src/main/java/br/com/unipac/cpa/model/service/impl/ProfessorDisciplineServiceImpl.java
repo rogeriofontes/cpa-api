@@ -5,6 +5,7 @@ import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.ProfessorDiscipline;
 import br.com.unipac.cpa.model.repository.ProfessorDisciplineRepository;
 import br.com.unipac.cpa.model.service.ProfessorDisciplineService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +18,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ProfessorDisciplineServiceImpl implements ProfessorDisciplineService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	private ProfessorDisciplineRepository professorDisciplineRepository;
+
 	private Iterable<ProfessorDiscipline> itr;
 
 	@Override
@@ -52,14 +53,14 @@ public class ProfessorDisciplineServiceImpl implements ProfessorDisciplineServic
 	}
 
 	@Override
-	@Cacheable(Constants.PERIODS_IN_CACHE)
+	@Cacheable(Constants.PROFESSORS_DISCIPLINE_IN_CACHE)
 	public List<ProfessorDiscipline> listAll() {
 		Iterable<ProfessorDiscipline> itr = professorDisciplineRepository.findAll();
 		return (List<ProfessorDiscipline>) itr;
 	}
 
 	@Override
-	@Cacheable(Constants.PERIODS_IN_CACHE)
+	@Cacheable(Constants.PROFESSORS_DISCIPLINE_IN_CACHE)
 	public Page<ProfessorDiscipline> findAllPageable(Pageable pageable) {
 		return professorDisciplineRepository.findAll(pageable);
 	}

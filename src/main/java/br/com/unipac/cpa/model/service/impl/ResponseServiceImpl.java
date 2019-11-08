@@ -5,6 +5,7 @@ import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Response;
 import br.com.unipac.cpa.model.repository.ResponseRepository;
 import br.com.unipac.cpa.model.service.ResponseService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ResponseServiceImpl implements ResponseService {
 

@@ -8,6 +8,7 @@ import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Course;
 import br.com.unipac.cpa.model.repository.CourseRepository;
 import br.com.unipac.cpa.model.service.CourseService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class CourseServiceImpl implements CourseService {
 

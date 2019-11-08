@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.support.DocumentRegionSupport;
 import br.com.unipac.cpa.web.dto.response.DocumentRegionResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/v1/document-regions")
 public class DocumentRegionResources {
-private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private DocumentRegionSupport conversionSupport;
@@ -32,7 +33,7 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
 		List<DocumentRegionResponse> result = conversionSupport.list();
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.size());
+			log.info(Constants.TOTAL + result.size());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();

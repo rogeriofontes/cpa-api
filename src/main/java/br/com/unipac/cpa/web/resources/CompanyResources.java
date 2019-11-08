@@ -8,6 +8,7 @@ import br.com.unipac.cpa.web.dto.response.CompanyResponse;
 import br.com.unipac.cpa.web.support.CompanySupport;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.request.CompanyRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.codahale.metrics.annotation.Timed;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/v1/companys")
 public class CompanyResources {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private CompanySupport companySupport;
@@ -34,7 +34,7 @@ public class CompanyResources {
 		List<CompanyResponse> result = companySupport.list();
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.size());
+			log.info(Constants.TOTAL + result.size());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -48,7 +48,7 @@ public class CompanyResources {
 		CompanyResponse result = companySupport.convertToFindById(id);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -62,7 +62,7 @@ public class CompanyResources {
 		CompanyResponse result = companySupport.convertToCreate(companyRequest);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -76,7 +76,7 @@ public class CompanyResources {
 		CompanyResponse result = companySupport.convertToChange(id, companyDTO);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
@@ -103,7 +103,7 @@ public class CompanyResources {
 		CompanyResponse result = companySupport.convertToFindByName(name);
 
 		if (result != null) {
-			logger.info(Constants.TOTAL + result.toString());
+			log.info(Constants.TOTAL + result.toString());
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.noContent().build();
