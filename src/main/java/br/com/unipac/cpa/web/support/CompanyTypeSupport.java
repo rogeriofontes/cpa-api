@@ -1,19 +1,19 @@
 package br.com.unipac.cpa.web.support;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import br.com.unipac.cpa.exception.ResourceNotFoundException;
-import br.com.unipac.cpa.web.dto.response.CompanyTypeResponse;
 import br.com.unipac.cpa.model.domain.CompanyType;
 import br.com.unipac.cpa.model.service.CompanyTypeService;
 import br.com.unipac.cpa.web.dto.request.CompanyTypeRequest;
+import br.com.unipac.cpa.web.dto.response.CompanyTypeResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CompanyTypeSupport {
@@ -32,7 +32,8 @@ public class CompanyTypeSupport {
 
         if (companyType.isPresent()) {
             founded = conversion.convert(companyType.get(), CompanyTypeResponse.class);
-            log.info("CompanyType: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }
@@ -41,9 +42,18 @@ public class CompanyTypeSupport {
     }
 
     public CompanyTypeResponse convertToFindByName(String name) {
+        CompanyTypeResponse founded = null;
+
         Optional<CompanyType> companyType = service.findByName(name);
-        CompanyTypeResponse founded = conversion.convert(companyType.get(), CompanyTypeResponse.class);
-        log.info("CompanyType: " + founded.toString());
+
+
+        if (companyType.isPresent()) {
+            founded = conversion.convert(companyType.get(), CompanyTypeResponse.class);
+            if (founded != null)
+                log.info("Company: {} ", founded);
+        } else {
+            throw new ResourceNotFoundException("Company Type not found");
+        }
         return founded;
     }
 

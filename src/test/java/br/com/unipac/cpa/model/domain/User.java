@@ -1,11 +1,10 @@
 package br.com.unipac.cpa.model.domain;
 
-import javax.persistence.*;
-
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,7 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, of = { "email", "password" })
-@Data
 public class User extends AudityEntity implements UserDetails {
 
 	private static final long serialVersionUID = -1162093762286562478L;

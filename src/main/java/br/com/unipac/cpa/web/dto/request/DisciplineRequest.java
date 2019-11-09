@@ -1,12 +1,9 @@
 package br.com.unipac.cpa.web.dto.request;
 
-import br.com.unipac.cpa.model.domain.Professor;
-import br.com.unipac.cpa.model.domain.Student;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 @Builder
 @NoArgsConstructor
@@ -34,11 +31,4 @@ public class DisciplineRequest implements Serializable {
     @Setter
     private Long periodId;
 
-   // @Getter
-   // @Setter
-    //private Set<Professor> professors;
-
-   // @Getter
-  //  @Setter
-   // private Set<Student> students;
 }

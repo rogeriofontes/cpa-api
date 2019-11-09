@@ -1,17 +1,8 @@
 package br.com.unipac.cpa.web.dto.request;
 
-import java.io.Serializable;
-import java.util.List;
+import lombok.*;
 
-import br.com.unipac.cpa.web.dto.UserTypeDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.io.Serializable;
 
 @Builder
 @NoArgsConstructor

@@ -1,23 +1,21 @@
 package br.com.unipac.cpa.web.support;
 
+import br.com.unipac.cpa.model.domain.DocumentRegion;
+import br.com.unipac.cpa.model.service.DocumentRegionService;
+import br.com.unipac.cpa.web.dto.response.DocumentRegionResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.unipac.cpa.model.domain.DocumentRegion;
-import br.com.unipac.cpa.model.service.DocumentRegionService;
-import br.com.unipac.cpa.web.dto.response.DocumentRegionResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Component;
-
+@Slf4j
 @Component
 public class DocumentRegionSupport {
-
-	private static final Logger log = LogManager.getLogger(CompanyTypeSupport.class);
 
 	@Autowired
 	private DocumentRegionService service;
@@ -35,7 +33,6 @@ public class DocumentRegionSupport {
 				documentRegions.add(saved);
 			});
 			
-			log.info(documentRegions.size());
 			return documentRegions;
 		}
 		

@@ -6,9 +6,6 @@ import br.com.unipac.cpa.model.domain.StudentDiscipline;
 import br.com.unipac.cpa.model.repository.StudentDisciplineRepository;
 import br.com.unipac.cpa.model.service.StudentDisciplineService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -24,8 +21,6 @@ public class StudentDisciplineServiceImpl implements StudentDisciplineService {
 
 	@Autowired
 	private StudentDisciplineRepository studentDisciplineRepository;
-
-	private Iterable<StudentDiscipline> itr;
 
 	@Override
 	public StudentDiscipline save(StudentDiscipline e) {
@@ -55,8 +50,7 @@ public class StudentDisciplineServiceImpl implements StudentDisciplineService {
 	@Override
 	@Cacheable(Constants.STUDENTS_DISCIPLINE_IN_CACHE)
 	public List<StudentDiscipline> listAll() {
-		Iterable<StudentDiscipline> itr = studentDisciplineRepository.findAll();
-		return (List<StudentDiscipline>) itr;
+		return studentDisciplineRepository.findAll();
 	}
 
 	@Override
@@ -69,7 +63,7 @@ public class StudentDisciplineServiceImpl implements StudentDisciplineService {
 	public boolean remove(Long id) {
 		Optional<StudentDiscipline> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			studentDisciplineRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

@@ -1,37 +1,23 @@
 package br.com.unipac.cpa.model.domain;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
-
-import br.com.unipac.cpa.util.DateUtil;
 import br.com.unipac.cpa.constants.Constants;
+import br.com.unipac.cpa.util.DateUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @MappedSuperclass
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -58,7 +44,7 @@ public abstract class AudityEntity implements Serializable {
 	@CreatedDate
 	@Getter
 	@Setter
-	private LocalDateTime createdDate = DateUtil.convert(new Date());
+	private transient LocalDateTime createdDate = DateUtil.convert(new Date());
 
 	@NotNull
 	@Column(name = "create_by")
@@ -73,7 +59,7 @@ public abstract class AudityEntity implements Serializable {
 	@LastModifiedDate
 	@Getter
 	@Setter
-	private LocalDateTime lastModifiedDate;
+	private transient LocalDateTime lastModifiedDate;
 
 	@Column(name = "last_modified_by")
 	@JsonIgnore

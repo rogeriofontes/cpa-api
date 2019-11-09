@@ -2,7 +2,8 @@ package br.com.unipac.cpa.model.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "local")
@@ -11,7 +12,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, of = {"city", "uf"})
-@Data
 public class Local extends AudityEntity {
 
     @Getter

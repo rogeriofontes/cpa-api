@@ -1,10 +1,8 @@
 package br.com.unipac.cpa.web.convert.request;
 
-import br.com.unipac.cpa.model.domain.Course;
 import br.com.unipac.cpa.model.domain.Discipline;
 import br.com.unipac.cpa.model.domain.Professor;
 import br.com.unipac.cpa.model.domain.ProfessorDiscipline;
-import br.com.unipac.cpa.model.repository.CourseRepository;
 import br.com.unipac.cpa.model.repository.DisciplineRepository;
 import br.com.unipac.cpa.model.repository.ProfessorRepository;
 import br.com.unipac.cpa.web.dto.request.ProfessorDisciplineRequest;
@@ -25,25 +23,33 @@ public class ProfessorDisciplineRequestConverter implements Converter<ProfessorD
 
     @Override
     public ProfessorDiscipline convert(ProfessorDisciplineRequest professorDisciplineRequest) {
-        Optional<Discipline> discipline = Optional.empty();
-        Optional<Professor> professor = Optional.empty();
-
         ProfessorDiscipline professorDiscipline = new ProfessorDiscipline();
 
-        if (professorDisciplineRequest.getProfessorId() != null && professorDisciplineRequest.getProfessorId().intValue() > 0) {
-            professor = professorRepository.findById(professorDisciplineRequest.getProfessorId());
-            if (professor.isPresent()) {
-                professorDiscipline.setProfessor(professor.get());
-            }
-        }
-
-        if (professorDisciplineRequest.getDisciplineId() != null && professorDisciplineRequest.getDisciplineId().intValue() > 0) {
-            discipline = disciplineRepository.findById(professorDisciplineRequest.getDisciplineId());
-            if (discipline.isPresent()) {
-                professorDiscipline.setDiscipline(discipline.get());
-            }
-        }
+        professorDiscipline.setProfessor(getProfessorDiscipline(professorDisciplineRequest));
+        professorDiscipline.setDiscipline(getDiscipline(professorDisciplineRequest));
 
         return professorDiscipline;
+    }
+
+    private Professor getProfessorDiscipline(ProfessorDisciplineRequest professorDisciplineRequest) {
+        if (professorDisciplineRequest.getProfessorId() != null && professorDisciplineRequest.getProfessorId().intValue() > 0) {
+            Optional<Professor> professor = professorRepository.findById(professorDisciplineRequest.getProfessorId());
+            if (professor.isPresent()) {
+               return professor.get();
+            }
+        }
+
+        return null;
+    }
+
+    private Discipline getDiscipline(ProfessorDisciplineRequest professorDisciplineRequest) {
+        if (professorDisciplineRequest.getDisciplineId() != null && professorDisciplineRequest.getDisciplineId().intValue() > 0) {
+            Optional<Discipline> discipline = disciplineRepository.findById(professorDisciplineRequest.getDisciplineId());
+            if (discipline.isPresent()) {
+                return discipline.get();
+            }
+        }
+
+        return null;
     }
 }

@@ -6,8 +6,6 @@ import br.com.unipac.cpa.web.dto.response.ProfessorDisciplineResponse;
 import br.com.unipac.cpa.web.support.ProfessorDisciplineSupport;
 import com.codahale.metrics.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
@@ -30,7 +28,7 @@ public class ProfessorDisciplineResources {
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Timed
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<List<ProfessorDisciplineResponse>> getAll() {
         log.info("teste");
         List<ProfessorDisciplineResponse> result = conversionSupport.list();
 
@@ -89,7 +87,7 @@ public class ProfessorDisciplineResources {
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Timed
     @CacheEvict(value = Constants.PROFESSORS_DISCIPLINE_IN_CACHE, allEntries = true)
-    public ResponseEntity<?> remove(@PathVariable Long id) {
+    public ResponseEntity<String> remove(@PathVariable Long id) {
         boolean result = conversionSupport.remove(id);
         if (result) {
             return ResponseEntity.ok(Constants.DADOS_DELETADOS);

@@ -1,6 +1,5 @@
 package br.com.unipac.cpa.web.dto.response;
 
-import br.com.unipac.cpa.model.domain.Professor;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

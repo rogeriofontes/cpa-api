@@ -2,7 +2,9 @@ package br.com.unipac.cpa.util;
 
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.unipac.cpa.exception.NotImplementationConstructionException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public final class CPFUtil {
 
 	private CPFUtil() {
@@ -15,7 +17,7 @@ public final class CPFUtil {
 			cpfValidator.assertValid(String.valueOf(documentId));
 			return Boolean.TRUE;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.info("Erro ao validar CPF: [" + e.getMessage() + "]");
 			return Boolean.FALSE;
 		}
 	}

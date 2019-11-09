@@ -1,23 +1,20 @@
 package br.com.unipac.cpa.model.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.exception.ResourceFoundException;
 import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.CompanyType;
+import br.com.unipac.cpa.model.repository.CompanyTypeRepository;
 import br.com.unipac.cpa.model.service.CompanyTypeService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.unipac.cpa.model.repository.CompanyTypeRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -119,7 +116,7 @@ public class CompanyTypeServiceImpl implements CompanyTypeService {
 	public boolean remove(Long id) {
 		Optional<CompanyType> result = findById(id);
 		
-		if (result != null) {
+		if (result.isPresent()) {
 			clientTypeeRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

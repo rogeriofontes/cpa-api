@@ -1,11 +1,11 @@
 package br.com.unipac.cpa.web.support;
 
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Question;
 import br.com.unipac.cpa.model.service.QuestionService;
 import br.com.unipac.cpa.web.dto.request.QuestionRequest;
 import br.com.unipac.cpa.web.dto.response.QuestionResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class QuestionSupport {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private QuestionService questionService;
@@ -26,16 +25,30 @@ public class QuestionSupport {
     private ConversionService conversionQuestion;
 
     public QuestionResponse convertToFindById(Long id) {
+        QuestionResponse founded = null;
         Optional<Question> question = questionService.findById(id);
-        QuestionResponse founded = conversionQuestion.convert(question.get(), QuestionResponse.class);
-        logger.info("Question" + founded.toString());
+
+        if (question.isPresent()) {
+            founded = conversionQuestion.convert(question.get(), QuestionResponse.class);
+            if (founded != null)
+                log.info("Company: {} ", founded);
+        } else {
+            throw new ResourceNotFoundException("Question not found");
+        }
         return founded;
     }
 
     public QuestionResponse convertToFindByTitle(String title) {
+        QuestionResponse founded = null;
         Optional<Question> question = questionService.findByTitle(title);
-        QuestionResponse founded = conversionQuestion.convert(question.get(), QuestionResponse.class);
-        logger.info("Question: " + founded.toString());
+
+        if (question.isPresent()) {
+            founded = conversionQuestion.convert(question.get(), QuestionResponse.class);
+            if (founded != null)
+                log.info("Company: {} ", founded);
+        } else {
+            throw new ResourceNotFoundException("Question not found");
+        }
         return founded;
     }
 

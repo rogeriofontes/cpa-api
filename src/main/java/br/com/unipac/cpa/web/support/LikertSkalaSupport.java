@@ -32,7 +32,8 @@ public class LikertSkalaSupport {
 
         if (likertSkala.isPresent()) {
             founded = conversion.convert(likertSkala.get(), LikertSkalaResponse.class);
-            log.info("LikertSkala: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }

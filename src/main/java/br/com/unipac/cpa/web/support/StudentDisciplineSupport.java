@@ -6,8 +6,6 @@ import br.com.unipac.cpa.model.service.StudentDisciplineService;
 import br.com.unipac.cpa.web.dto.request.StudentDisciplineRequest;
 import br.com.unipac.cpa.web.dto.response.StudentDisciplineResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
@@ -32,7 +30,8 @@ public class StudentDisciplineSupport {
 
         if (studentDiscipline.isPresent()) {
             founded = conversion.convert(studentDiscipline.get(), StudentDisciplineResponse.class);
-            log.info("StudentDiscipline: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }

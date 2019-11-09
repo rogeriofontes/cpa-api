@@ -5,11 +5,7 @@ import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Discipline;
 import br.com.unipac.cpa.model.repository.DisciplineRepository;
 import br.com.unipac.cpa.model.service.DisciplineService;
-import br.com.unipac.cpa.model.service.DisciplineService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -23,14 +19,11 @@ import java.util.Optional;
 @Service
 public class DisciplineServiceImpl implements DisciplineService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	private DisciplineRepository disciplineRepository;
 
 	@Override
 	public boolean sendInformation(Discipline discipline) {
-		logger.info("Saved: " + !StringUtils.isEmpty(discipline.toString()));
 		return false;
 	}
 
@@ -76,7 +69,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	public boolean remove(Long id) {
 		Optional<Discipline> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			disciplineRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

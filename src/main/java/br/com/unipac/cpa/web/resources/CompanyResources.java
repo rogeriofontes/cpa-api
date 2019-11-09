@@ -1,23 +1,19 @@
 package br.com.unipac.cpa.web.resources;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import br.com.unipac.cpa.web.dto.response.CompanyResponse;
-import br.com.unipac.cpa.web.support.CompanySupport;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.request.CompanyRequest;
+import br.com.unipac.cpa.web.dto.response.CompanyResponse;
+import br.com.unipac.cpa.web.support.CompanySupport;
+import com.codahale.metrics.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.codahale.metrics.annotation.Timed;
+import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -86,7 +82,7 @@ public class CompanyResources {
 	@DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@Timed
 	@CacheEvict(value = Constants.COMPANYS_IN_CACHE, allEntries = true)
-	public ResponseEntity<?> remove(@PathVariable Long id) {
+	public ResponseEntity<String> remove(@PathVariable Long id) {
 		boolean result = companySupport.remove(id);
 
 		if (result) {

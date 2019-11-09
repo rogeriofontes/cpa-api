@@ -37,9 +37,10 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService, U
 		if (user != null) {
 			Set<Role> roles = user.getRoles();
 			authorities = buildUserAuthority(roles);
+			return buildUserForAuthentication(user, authorities);
 		}
 		
-		return buildUserForAuthentication(user, authorities);
+		return null;
 	}
 
 	@Transactional
@@ -58,7 +59,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService, U
 
 		// Build user's authorities
 		for (Role role : roles) {
-			setAuths.add(new SimpleGrantedAuthority(role.getRole()));
+			setAuths.add(new SimpleGrantedAuthority(role.getRoleName()));
 		}
 
 		return new ArrayList<>(setAuths);

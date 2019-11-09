@@ -1,5 +1,6 @@
 package br.com.unipac.cpa.web.support;
 
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Student;
 import br.com.unipac.cpa.model.service.StudentService;
 import br.com.unipac.cpa.web.dto.request.StudentRequest;
@@ -26,16 +27,31 @@ public class StudentSupport {
 	private ConversionService conversionService;
 	
 	public StudentResponse convertToFindById(Long id) {
-		Optional<Student> employee = studentService.findById(id);
-		StudentResponse founded = conversionService.convert(employee.get(), StudentResponse.class);
-		log.info("Student" + founded.toString());
+		StudentResponse founded = null;
+		Optional<Student> student = studentService.findById(id);
+
+		if (student.isPresent()) {
+			founded = conversionService.convert(student.get(), StudentResponse.class);
+			if (founded != null)
+				log.info("Company: {} ", founded);
+		} else {
+			throw new ResourceNotFoundException("Student not found");
+		}
 		return founded;
 	}
 
 	public StudentResponse convertToFindByName(String name) {
-		Optional<Student> employee = studentService.findByName(name);
-		StudentResponse founded = conversionService.convert(employee.get(), StudentResponse.class);
-		log.info("Student: " + founded.toString());
+		StudentResponse founded = null;
+		Optional<Student> student = studentService.findByName(name);
+
+		if (student.isPresent()) {
+			founded = conversionService.convert(student.get(), StudentResponse.class);
+			if (founded != null)
+				log.info("Company: {} ", founded);
+		} else {
+			throw new ResourceNotFoundException("Student not found");
+		}
+
 		return founded;
 	}
 
@@ -58,8 +74,8 @@ public class StudentSupport {
 		return conversionService.convert(student, StudentResponse.class);
 	}
 
-	public StudentResponse convertToChange(Long id, StudentRequest employeeRequest) {
-		Student student = conversionService.convert(employeeRequest, Student.class);
+	public StudentResponse convertToChange(Long id, StudentRequest studentRequest) {
+		Student student = conversionService.convert(studentRequest, Student.class);
 		Student updated = studentService.edit(id, student);
 		return getConverter(updated);
 	}

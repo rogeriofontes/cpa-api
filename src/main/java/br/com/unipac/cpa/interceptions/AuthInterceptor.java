@@ -1,7 +1,5 @@
 package br.com.unipac.cpa.interceptions;
 
-import java.io.IOException;
-
 import br.com.unipac.cpa.model.dto.Login;
 import br.com.unipac.cpa.model.dto.LoginResponse;
 import org.springframework.http.HttpEntity;
@@ -14,6 +12,8 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
 
 public class AuthInterceptor implements ClientHttpRequestInterceptor {
 	
@@ -44,7 +44,7 @@ public class AuthInterceptor implements ClientHttpRequestInterceptor {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("Content-Type", "application/json");
 
 		HttpEntity<Login> requestEntity = new HttpEntity<>(login, headers);

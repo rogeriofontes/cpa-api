@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Qualifier(value = "userRoleRepository")
 public interface UserRoleRepository extends JpaRepository<Role, Long> {
-	Role findByRole(@Param("role") String role);
+	Role findByRoleName(@Param("role") String role);
 }

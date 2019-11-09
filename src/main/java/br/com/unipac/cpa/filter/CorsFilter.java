@@ -10,16 +10,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		log.info("init filter - Cors");
 	}
 
 	@Override
@@ -38,6 +41,7 @@ public class CorsFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		log.info("destroy filter - Cors");
 	}
 
 }

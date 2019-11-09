@@ -6,9 +6,6 @@ import br.com.unipac.cpa.model.domain.Response;
 import br.com.unipac.cpa.model.repository.ResponseRepository;
 import br.com.unipac.cpa.model.service.ResponseService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -22,11 +19,8 @@ import java.util.Optional;
 @Service
 public class ResponseServiceImpl implements ResponseService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	private ResponseRepository pesponseRepository;
-	private Iterable<Response> itr;
 
 	@Override
 	public Response save(Response e) {
@@ -56,8 +50,7 @@ public class ResponseServiceImpl implements ResponseService {
 	@Override
 	@Cacheable(Constants.PERIODS_IN_CACHE)
 	public List<Response> listAll() {
-		Iterable<Response> itr = pesponseRepository.findAll();
-		return (List<Response>) itr;
+		return pesponseRepository.findAll();
 	}
 
 	@Override
@@ -70,7 +63,7 @@ public class ResponseServiceImpl implements ResponseService {
 	public boolean remove(Long id) {
 		Optional<Response> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			pesponseRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

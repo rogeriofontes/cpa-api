@@ -2,7 +2,6 @@ package br.com.unipac.cpa.web.dto.response;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Builder

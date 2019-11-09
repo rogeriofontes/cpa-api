@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import br.com.unipac.cpa.exception.NotImplementationConstructionException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DateUtil {
 	
 	private DateUtil(){
@@ -35,7 +37,7 @@ public class DateUtil {
 		try {
 			return formatter.parse(date);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.info("Erro ao Formatar data: [" + e.getMessage() + "]");
 		}
 
 		return null;

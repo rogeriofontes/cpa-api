@@ -23,10 +23,10 @@ public class TokenAuthenticationService {
 	}
 
 	public static void addAuthentication(HttpServletResponse res, String username) {
-		String JWT = Jwts.builder().setSubject(username)
+		String jwt = Jwts.builder().setSubject(username)
 				.setExpiration(new Date(System.currentTimeMillis() + JWTUtil.EXPIRATIONTIME))
 				.signWith(SignatureAlgorithm.HS512, JWTUtil.SECRET).compact();
-		res.addHeader(JWTUtil.HEADER_STRING, JWTUtil.TOKEN_PREFIX + " " + JWT);
+		res.addHeader(JWTUtil.HEADER_STRING, JWTUtil.TOKEN_PREFIX + " " + jwt);
 	}
 
 	public static Authentication getAuthentication(HttpServletRequest request) {

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data public class BusinessFront extends AudityEntity {
+public class BusinessFront extends AudityEntity {
 
     private static final long serialVersionUID = -3713207158221953195L;
 

@@ -5,8 +5,7 @@ import br.com.unipac.cpa.model.domain.Response;
 import br.com.unipac.cpa.model.service.ResponseService;
 import br.com.unipac.cpa.web.dto.request.ResponseRequest;
 import br.com.unipac.cpa.web.dto.response.ResponseResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
@@ -15,10 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class ResponseSupport {
-
-    private static final Logger log = LogManager.getLogger(ResponseSupport.class);
 
     @Autowired
     private ResponseService service;
@@ -32,7 +30,8 @@ public class ResponseSupport {
 
         if (response.isPresent()) {
             founded = conversion.convert(response.get(), ResponseResponse.class);
-            log.info("Response: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }

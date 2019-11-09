@@ -2,8 +2,6 @@ package br.com.unipac.cpa.web.dto.response;
 
 import lombok.*;
 
-import java.util.Date;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

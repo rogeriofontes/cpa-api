@@ -1,7 +1,10 @@
 package br.com.unipac.cpa.model.domain;
 
-import java.util.ArrayList;
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
+
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum PersonType {
 	LEGAL(1, "Pessoa Juridica"), PHYSICAL(2, "Pessoa Fisica");
@@ -32,28 +35,15 @@ public enum PersonType {
 	}
 	
 	public int getByType(String type) {
-		for (PersonType personType : PersonType.values()) {
-			if (type.equals(personType.name)) {
-				return personType.getOrdinal();
-			}
-		}
-		return 0;
+		return Stream.of(PersonType.values()).filter(p -> p.name().equals(type)).findAny().orElse(PersonType.PHYSICAL).ordinal;
 	}
 	
 	public static List<PersonType> getPersonTypes() {
-		List<PersonType> types = new ArrayList<>();
-  		for (PersonType type : PersonType.values()) {
-  			types.add(type);
-		}
-		return types;
+		return Stream.of(PersonType.values())
+				.collect(Collectors.toList());
 	}
 	
 	public static PersonType get(String personType) {
-		for (PersonType type : PersonType.values()) {
-			if (personType.equals(type.name())) {
-				return type;
-			}
-		}
-		return null;
+		return Stream.of(PersonType.values()).filter(p -> p.name.equals(personType)).findAny().orElseThrow(() -> new ResourceNotFoundException("States not Found"));
 	}
 }

@@ -1,9 +1,6 @@
 package br.com.unipac.cpa.web.support;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Professor;
 import br.com.unipac.cpa.model.service.ProfessorService;
 import br.com.unipac.cpa.web.dto.request.ProfessorRequest;
@@ -14,43 +11,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Component
 public class ProfessorSupport {
 
 	private final Logger log = LogManager.getLogger(this.getClass());
 
 	@Autowired
-	private ProfessorService studentService;
+	private ProfessorService professorService;
 
 	@Autowired
 	private ConversionService conversionService;
 	
 	public ProfessorResponse convertToFindById(Long id) {
-		Optional<Professor> student = studentService.findById(id);
-		ProfessorResponse founded = conversionService.convert(student.get(), ProfessorResponse.class);
-		log.info("Professor" + founded.toString());
+		ProfessorResponse founded = null;
+		Optional<Professor> professor = professorService.findById(id);
+
+		if (professor.isPresent()) {
+			founded = conversionService.convert(professor.get(), ProfessorResponse.class);
+			if (founded != null)
+				log.info("Company: {} ", founded);
+		} else {
+			throw new ResourceNotFoundException("Professor not found");
+		}
 		return founded;
 	}
 
 	public ProfessorResponse convertToFindByName(String name) {
-		Optional<Professor> student = studentService.findByName(name);
-		ProfessorResponse founded = conversionService.convert(student.get(), ProfessorResponse.class);
-		log.info("Professor: " + founded.toString());
+		ProfessorResponse founded = null;
+		Optional<Professor> professor = professorService.findByName(name);
+
+		if (professor.isPresent()) {
+			founded = conversionService.convert(professor.get(), ProfessorResponse.class);
+			if (founded != null)
+				log.info("Company: {} ", founded);
+		} else {
+			throw new ResourceNotFoundException("Professor not found");
+		}
 		return founded;
 	}
 
 	public List<ProfessorResponse> list() {
-		List<ProfessorResponse> studentes = new ArrayList<>();
-		studentService.listAll().forEach(student -> {
-			ProfessorResponse saved = conversionService.convert(student, ProfessorResponse.class);
-			studentes.add(saved);
+		List<ProfessorResponse> professores = new ArrayList<>();
+		professorService.listAll().forEach(professor -> {
+			ProfessorResponse saved = conversionService.convert(professor, ProfessorResponse.class);
+			professores.add(saved);
 		});
-		return studentes;
+		return professores;
 	}
 
 	public ProfessorResponse convertToCreate(ProfessorRequest professorRequest) {
 		Professor professor = conversionService.convert(professorRequest, Professor.class);
-		Professor saved = studentService.save(professor);
+		Professor saved = professorService.save(professor);
 		return getConverter(saved);
 	}
 
@@ -60,11 +75,11 @@ public class ProfessorSupport {
 
 	public ProfessorResponse convertToChange(Long id, ProfessorRequest professorRequest) {
 		Professor professor = conversionService.convert(professorRequest, Professor.class);
-		Professor updated = studentService.edit(id, professor);
+		Professor updated = professorService.edit(id, professor);
 		return getConverter(updated);
 	}
 
 	public boolean remove(Long id) {
-		return studentService.remove(id);
+		return professorService.remove(id);
 	}
 }

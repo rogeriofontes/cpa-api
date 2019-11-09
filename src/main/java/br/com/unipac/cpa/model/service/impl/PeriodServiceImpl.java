@@ -6,9 +6,6 @@ import br.com.unipac.cpa.model.domain.Period;
 import br.com.unipac.cpa.model.repository.PeriodRepository;
 import br.com.unipac.cpa.model.service.PeriodService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -22,15 +19,11 @@ import java.util.Optional;
 @Service
 public class PeriodServiceImpl implements PeriodService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	private PeriodRepository periodRepository;
-	private Iterable<Period> itr;
 
 	@Override
 	public boolean sendInformation(Period period) {
-		logger.info("Saved: " + !StringUtils.isEmpty(period.toString()));
 		return false;
 	}
 
@@ -62,8 +55,7 @@ public class PeriodServiceImpl implements PeriodService {
 	@Override
 	@Cacheable(Constants.PERIODS_IN_CACHE)
 	public List<Period> listAll() {
-		Iterable<Period> itr = periodRepository.findAll();
-		return (List<Period>) itr;
+		return periodRepository.findAll();
 	}
 
 	@Override
@@ -76,7 +68,7 @@ public class PeriodServiceImpl implements PeriodService {
 	public boolean remove(Long id) {
 		Optional<Period> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			periodRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

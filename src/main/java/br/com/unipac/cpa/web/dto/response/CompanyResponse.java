@@ -1,21 +1,13 @@
 package br.com.unipac.cpa.web.dto.response;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
-import javax.validation.constraints.NotNull;
-
 import br.com.unipac.cpa.model.domain.DocumentRegion;
 import br.com.unipac.cpa.model.domain.PersonType;
 import br.com.unipac.cpa.model.domain.Sex;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Builder
 @NoArgsConstructor
@@ -49,7 +41,7 @@ public class CompanyResponse implements Serializable {
 
 	@Getter
 	@Setter
-	private LocalDate birthDate;
+	private transient LocalDate birthDate;
 
 	@Getter
 	@Setter

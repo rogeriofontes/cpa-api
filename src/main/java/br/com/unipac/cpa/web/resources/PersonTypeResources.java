@@ -1,13 +1,10 @@
 package br.com.unipac.cpa.web.resources;
 
-import java.util.List;
-
 import br.com.unipac.cpa.constants.Constants;
-import br.com.unipac.cpa.web.support.PersonTypeSupport;
 import br.com.unipac.cpa.web.dto.response.PersonTypeResponse;
+import br.com.unipac.cpa.web.support.PersonTypeSupport;
+import com.codahale.metrics.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codahale.metrics.annotation.Timed;
+import java.util.List;
 
 @Slf4j
 @RestController

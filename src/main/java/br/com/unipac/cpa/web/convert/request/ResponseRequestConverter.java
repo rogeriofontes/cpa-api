@@ -1,16 +1,15 @@
 package br.com.unipac.cpa.web.convert.request;
 
 import br.com.unipac.cpa.model.domain.*;
-import br.com.unipac.cpa.model.repository.*;
+import br.com.unipac.cpa.model.repository.ChoiceRepository;
+import br.com.unipac.cpa.model.repository.ProfessorDisciplineRepository;
+import br.com.unipac.cpa.model.repository.QuestionRepository;
+import br.com.unipac.cpa.model.repository.StudentDisciplineRepository;
 import br.com.unipac.cpa.web.dto.request.ResponseRequest;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.Optional;
 
 @Component
@@ -30,45 +29,56 @@ public class ResponseRequestConverter implements Converter<ResponseRequest, Resp
 
     @Override
     public Response convert(ResponseRequest responseRequest) {
-        Optional<Question> question = Optional.empty();
-        Optional<Choice> choice = Optional.empty();
-        Optional<Student> student = Optional.empty();
-        Optional<ProfessorDiscipline> professorDiscipline = Optional.empty();
-        Optional<StudentDiscipline> studentDiscipline = Optional.empty();
-
-        Response response = Response.builder()
+        return Response.builder()
                 .title(responseRequest.getTitle())
+                .studentDiscipline(getStudentDiscipline(responseRequest))
+                .professorDiscipline(getProfessorDiscipline(responseRequest))
+                .choice(getChoice(responseRequest))
+                .question(getQuestion(responseRequest))
                 .description(responseRequest.getDescription()).build();
+    }
 
-
-        if (responseRequest.getQuestionId() != null && responseRequest.getQuestionId().intValue() > 0) {
-            question = questionRepository.findById(responseRequest.getQuestionId());
-            if (question.isPresent()) {
-                response.setQuestion(question.get());
-            }
-        }
-
-        if (responseRequest.getChoiceId() != null && responseRequest.getChoiceId().intValue() > 0) {
-            choice = choiceRepository.findById(responseRequest.getChoiceId());
-            if (choice.isPresent()) {
-                response.setChoice(choice.get());
-            }
-        }
-
-        if (responseRequest.getProfessorDisciplineId() != null && responseRequest.getProfessorDisciplineId().intValue() > 0) {
-            professorDiscipline = professorDisciplineRepository.findById(responseRequest.getProfessorDisciplineId());
-            if (professorDiscipline.isPresent()) {
-                response.setProfessorDiscipline(professorDiscipline.get());
-            }
-        }
-
+    private StudentDiscipline getStudentDiscipline(ResponseRequest responseRequest) {
         if (responseRequest.getStudentDisciplineId() != null && responseRequest.getStudentDisciplineId().intValue() > 0) {
-            studentDiscipline = studentDisciplineRepository.findById(responseRequest.getStudentDisciplineId());
+            Optional<StudentDiscipline> studentDiscipline = studentDisciplineRepository.findById(responseRequest.getStudentDisciplineId());
             if (studentDiscipline.isPresent()) {
-                response.setStudentDiscipline(studentDiscipline.get());
+               return studentDiscipline.get();
             }
         }
 
-        return response;
+        return null;
+    }
+
+    private ProfessorDiscipline getProfessorDiscipline(ResponseRequest responseRequest) {
+        if (responseRequest.getProfessorDisciplineId() != null && responseRequest.getProfessorDisciplineId().intValue() > 0) {
+            Optional<ProfessorDiscipline> professorDiscipline = professorDisciplineRepository.findById(responseRequest.getProfessorDisciplineId());
+            if (professorDiscipline.isPresent()) {
+               return  professorDiscipline.get();
+            }
+        }
+
+        return null;
+    }
+
+    private Choice getChoice(ResponseRequest responseRequest) {
+        if (responseRequest.getChoiceId() != null && responseRequest.getChoiceId().intValue() > 0) {
+            Optional<Choice> choice = choiceRepository.findById(responseRequest.getChoiceId());
+            if (choice.isPresent()) {
+                return choice.get();
+            }
+        }
+
+        return null;
+    }
+
+    private Question getQuestion(ResponseRequest responseRequest) {
+        if (responseRequest.getQuestionId() != null && responseRequest.getQuestionId().intValue() > 0) {
+            Optional<Question> question = questionRepository.findById(responseRequest.getQuestionId());
+            if (question.isPresent()) {
+                return question.get();
+            }
+        }
+
+        return null;
     }
 }

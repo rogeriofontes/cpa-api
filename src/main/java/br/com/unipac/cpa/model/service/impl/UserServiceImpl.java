@@ -1,7 +1,6 @@
 package br.com.unipac.cpa.model.service.impl;
 
 import br.com.unipac.cpa.model.domain.User;
-import br.com.unipac.cpa.model.domain.Role;
 import br.com.unipac.cpa.model.repository.UserRepository;
 import br.com.unipac.cpa.model.service.PasswordCrypto;
 import br.com.unipac.cpa.model.service.UserService;
@@ -11,10 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Slf4j
 @Service
@@ -29,16 +26,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(UserResponse dto) {
 		User user = new User();
-		Set<Role> roles = new HashSet<>();
 
 		user.setEmail(dto.getEmail());
 		user.setPassword(passwordCrypto.encrypt(dto.getPassword()));
-
-		// create a new user with basic user privileges
-		//oles.add(new Role(Roles.USER.toString(), user));
-		//roles.add(new Role(Roles.ADMIN.toString(), user));
-
-		// user.setRoles(roles);
 
 		return user;
 	}

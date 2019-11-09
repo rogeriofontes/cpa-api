@@ -1,19 +1,18 @@
 package br.com.unipac.cpa.web.support;
 
-import javax.servlet.ServletException;
-
-import br.com.unipac.cpa.web.dto.request.LoginRequest;
 import br.com.unipac.cpa.exception.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
-
 import br.com.unipac.cpa.model.domain.User;
 import br.com.unipac.cpa.model.dto.TokenResult;
 import br.com.unipac.cpa.model.service.PasswordCrypto;
 import br.com.unipac.cpa.model.service.UserService;
 import br.com.unipac.cpa.util.JWTUtil;
+import br.com.unipac.cpa.web.dto.request.LoginRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.ServletException;
 
 @Component
 public class AuthSupport {
@@ -31,8 +30,7 @@ public class AuthSupport {
 		validateLoginRequestIsNull(loginRequest);
 
 		UserDetails userResult = loadUserByUsername(loginRequest);
-		TokenResult tokenResult = resultLoginInfo(loginRequest, userResult);
-		return tokenResult;
+		return resultLoginInfo(loginRequest, userResult);
 	}
 
 	private UserDetails loadUserByUsername(LoginRequest loginRequest) {

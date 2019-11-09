@@ -32,18 +32,25 @@ public class DisciplineSupport {
 
         if (businessFront.isPresent()) {
             founded = conversion.convert(businessFront.get(), DisciplineResponse.class);
-            log.info("Discipline: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
-            throw new ResourceNotFoundException("Company Type not found");
+            throw new ResourceNotFoundException("Discipline not found");
         }
-
         return founded;
     }
 
     public DisciplineResponse convertToFindByName(String name) {
+        DisciplineResponse founded = null;
         Optional<Discipline> businessFront = service.findByName(name);
-        DisciplineResponse founded = conversion.convert(businessFront.get(), DisciplineResponse.class);
-        log.info("Discipline: " + founded.toString());
+
+        if (businessFront.isPresent()) {
+            founded = conversion.convert(businessFront.get(), DisciplineResponse.class);
+            if (founded != null)
+                log.info("Company: {} ", founded);
+        } else {
+            throw new ResourceNotFoundException("Discipline not found");
+        }
         return founded;
     }
 

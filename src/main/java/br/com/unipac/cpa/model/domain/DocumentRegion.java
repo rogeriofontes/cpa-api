@@ -1,7 +1,10 @@
 package br.com.unipac.cpa.model.domain;
 
-import java.util.ArrayList;
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
+
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum DocumentRegion {
 	STATE_AC("AC", "Acre"),
@@ -47,28 +50,14 @@ public enum DocumentRegion {
 	}
 	
 	public static DocumentRegion get(String states) {
-		for (DocumentRegion region : DocumentRegion.values()) {
-			if (states.equals(region.name())) {
-				return region;
-			}
-		}
-		return null;
+		return Stream.of(DocumentRegion.values()).filter(p -> p.name().equals(states)).findAny().orElseThrow(() -> new ResourceNotFoundException("States not Found"));
 	}
 	
 	public static String getStateByAcronym(String acronym) {
-		for (DocumentRegion region : DocumentRegion.values()) {
-			if (region.getAcronym().equals(acronym)) {
-				return region.getState();
-			}
-		}
-		return null;
+		return Stream.of(DocumentRegion.values()).filter(p -> p.getAcronym().equals(acronym)).findAny().orElse(DocumentRegion.STATE_MG).getAcronym();
 	}
 	
 	public static List<DocumentRegion> getDocumentRegions() {
-		List<DocumentRegion> regions = new ArrayList<>();
-  		for (DocumentRegion region : DocumentRegion.values()) {
-  			regions.add(region);
-		}
-		return regions;
+		return Stream.of(DocumentRegion.values()).collect(Collectors.toList());
 	}
 }

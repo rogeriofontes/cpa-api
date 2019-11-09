@@ -1,23 +1,19 @@
 package br.com.unipac.cpa.web.resources;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import br.com.unipac.cpa.web.support.CourseSupport;
 import br.com.unipac.cpa.constants.Constants;
 import br.com.unipac.cpa.web.dto.request.CourseRequest;
 import br.com.unipac.cpa.web.dto.response.CourseResponse;
+import br.com.unipac.cpa.web.support.CourseSupport;
+import com.codahale.metrics.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.codahale.metrics.annotation.Timed;
+import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -85,11 +81,11 @@ public class CourseResources {
 		}
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@Timed
 	@CacheEvict(value = Constants.COURSES_IN_CACHE, allEntries = true)
-	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+	public ResponseEntity<String> remove(@PathVariable("id") Long id) {
 		boolean result = conversionSupport.remove(id);
 		if (result) {
 			return ResponseEntity.ok(Constants.DADOS_DELETADOS);

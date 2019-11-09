@@ -116,7 +116,7 @@ public class CourseServiceTest {
         when(companyTypeService.save(client)).thenReturn(client);
         Course result = companyTypeService.save(client);
 
-       // assertEquals("root@localhost", result.getName());
+       assertEquals("root@localhost", result.getName());
     }
 
     @Test(expected = URLException.class)

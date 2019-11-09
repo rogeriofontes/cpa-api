@@ -28,7 +28,6 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, of = { "name", "email", "address", "companyType", "personType", "phone",
 		"mobile", "documentRegion", "socialId", "nationality" })
-@Data
 public class Company extends AudityEntity {
 	private static final long serialVersionUID = 8401721385730134860L;
 

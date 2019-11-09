@@ -1,14 +1,14 @@
 package br.com.unipac.cpa.model.dto;
 
 public class Token {
-	private String token;
+	private String tokken;
 
-	public String getToken() {
-		return token;
+	public String getTokken() {
+		return tokken;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setTokken(String tokken) {
+		this.tokken = tokken;
 	}
 
 }

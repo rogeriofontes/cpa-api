@@ -32,18 +32,26 @@ public class PeriodSupport {
 
         if (period.isPresent()) {
             founded = conversion.convert(period.get(), PeriodResponse.class);
-            log.info("Period: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
-            throw new ResourceNotFoundException("Company Type not found");
+            throw new ResourceNotFoundException("Period not found");
         }
 
         return founded;
     }
 
     public PeriodResponse convertToFindByName(String name) {
+        PeriodResponse founded = null;
         Optional<Period> period = service.findByName(name);
-        PeriodResponse founded = conversion.convert(period.get(), PeriodResponse.class);
-        log.info("Period: " + founded.toString());
+
+        if (period.isPresent()) {
+            founded = conversion.convert(period.get(), PeriodResponse.class);
+            if (founded != null)
+                log.info("Company: {} ", founded);
+        } else {
+            throw new ResourceNotFoundException("Period not found");
+        }
         return founded;
     }
 

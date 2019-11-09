@@ -7,8 +7,6 @@ import br.com.unipac.cpa.model.repository.StudentRepository;
 import br.com.unipac.cpa.model.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -74,7 +72,7 @@ public class StudentServiceImpl implements StudentService {
 	public boolean remove(Long id) {
 		Optional<Student> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			studentRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

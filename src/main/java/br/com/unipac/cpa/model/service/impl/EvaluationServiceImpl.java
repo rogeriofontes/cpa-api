@@ -6,9 +6,6 @@ import br.com.unipac.cpa.model.domain.Evaluation;
 import br.com.unipac.cpa.model.repository.EvaluationRepository;
 import br.com.unipac.cpa.model.service.EvaluationService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -22,14 +19,11 @@ import java.util.Optional;
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	private EvaluationRepository evaluationRepository;
 
 	@Override
 	public boolean sendInformation(Evaluation evaluation) {
-		logger.info("Saved: " + !StringUtils.isEmpty(evaluation.toString()));
 		return false;
 	}
 
@@ -76,7 +70,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 	public boolean remove(Long id) {
 		Optional<Evaluation> result = findById(id);
 
-		if (result != null) {
+		if (result.isPresent()) {
 			evaluationRepository.deleteById(id);
 			return Boolean.TRUE;
 		}

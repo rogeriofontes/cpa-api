@@ -6,8 +6,6 @@ import br.com.unipac.cpa.web.dto.response.StudentResponse;
 import br.com.unipac.cpa.web.support.StudentSupport;
 import com.codahale.metrics.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
@@ -86,7 +84,7 @@ public class StudentResources {
 	@ResponseBody
 	@Timed
 	@CacheEvict(value = Constants.STUDENTS_IN_CACHE, allEntries = true)
-	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+	public ResponseEntity<String> remove(@PathVariable("id") Long id) {
 		boolean result = studentSupport.remove(id);
 		
 		if (result) {

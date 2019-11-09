@@ -86,7 +86,7 @@ public class ProfessorResources {
 	@ResponseBody
 	@Timed
 	@CacheEvict(value = Constants.PROFESSORS_IN_CACHE, allEntries = true)
-	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+	public ResponseEntity<String> remove(@PathVariable("id") Long id) {
 		boolean result = professorSupport.remove(id);
 		
 		if (result) {

@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data public class Student extends AudityEntity {
+public class Student extends AudityEntity {
 
 	private static final long serialVersionUID = 225176755550680077L;
 

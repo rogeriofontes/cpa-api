@@ -32,7 +32,8 @@ public class ProfessorDisciplineSupport {
 
         if (professorDiscipline.isPresent()) {
             founded = conversion.convert(professorDiscipline.get(), ProfessorDisciplineResponse.class);
-            log.info("ProfessorDiscipline: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }

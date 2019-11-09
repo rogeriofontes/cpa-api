@@ -2,9 +2,11 @@ package br.com.unipac.cpa.model.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 @Table(name = "discipline")
@@ -31,22 +33,6 @@ import java.util.Set;
     @ManyToOne
     @JoinColumn(name = "period_id")
     private Period period;
-
-   /* @Getter
-    @Setter
-    @ManyToMany
-    @JoinTable(name = "professor_discipline",
-            joinColumns = @JoinColumn(name = "id_discipline", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_professor", referencedColumnName = "id"))
-    private Set<Professor> professors;
-
-    @Getter
-    @Setter
-    @ManyToMany
-    @JoinTable(name = "student_discipline",
-            joinColumns = @JoinColumn(name = "id_discipline", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_student", referencedColumnName = "id"))
-    private Set<Student> students;*/
 
     public void update(Discipline discipline){
         this.name = discipline.getName();

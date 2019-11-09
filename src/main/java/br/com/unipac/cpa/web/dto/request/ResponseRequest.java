@@ -1,11 +1,7 @@
 package br.com.unipac.cpa.web.dto.request;
 
-import br.com.unipac.cpa.model.domain.*;
 import lombok.*;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Builder

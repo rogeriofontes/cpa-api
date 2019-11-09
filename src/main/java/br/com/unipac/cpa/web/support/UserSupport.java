@@ -1,22 +1,20 @@
 package br.com.unipac.cpa.web.support;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.unipac.cpa.model.domain.User;
 import br.com.unipac.cpa.model.repository.UserRepository;
 import br.com.unipac.cpa.web.dto.response.UserResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Slf4j
 @Component
 public class UserSupport {
-
-	private static final Logger logger = LogManager.getLogger(UserSupport.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -26,9 +24,7 @@ public class UserSupport {
 
 	public UserResponse findUserByUsername(@PathVariable("username") String username) {
 		User user = userRepository.findByEmail(username);
-		UserResponse result = userConvert.convert(user, UserResponse.class);
-		logger.info("User: " + user.toString());
-		return result;
+		return userConvert.convert(user, UserResponse.class);
 	}
 
 	public List<UserResponse> list() {

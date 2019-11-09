@@ -5,8 +5,7 @@ import br.com.unipac.cpa.model.domain.Choice;
 import br.com.unipac.cpa.model.service.ChoiceService;
 import br.com.unipac.cpa.web.dto.request.ChoiceRequest;
 import br.com.unipac.cpa.web.dto.response.ChoiceResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
@@ -15,10 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class ChoiceSupport {
-
-    private static final Logger log = LogManager.getLogger(ChoiceSupport.class);
 
     @Autowired
     private ChoiceService service;
@@ -32,7 +30,8 @@ public class ChoiceSupport {
 
         if (choice.isPresent()) {
             founded = conversion.convert(choice.get(), ChoiceResponse.class);
-            log.info("Choice: " + founded.toString());
+            if (founded != null)
+                log.info("Company: {} ", founded);
         } else {
             throw new ResourceNotFoundException("Company Type not found");
         }

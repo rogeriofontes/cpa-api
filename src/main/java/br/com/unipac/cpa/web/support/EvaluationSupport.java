@@ -1,5 +1,6 @@
 package br.com.unipac.cpa.web.support;
 
+import br.com.unipac.cpa.exception.ResourceNotFoundException;
 import br.com.unipac.cpa.model.domain.Evaluation;
 import br.com.unipac.cpa.model.service.EvaluationService;
 import br.com.unipac.cpa.web.dto.request.EvaluationRequest;
@@ -26,16 +27,29 @@ public class EvaluationSupport {
 	private ConversionService conversionService;
 	
 	public EvaluationResponse convertToFindById(Long id) {
-		Optional<Evaluation> project = evaluationService.findById(id);
-		EvaluationResponse founded = conversionService.convert(project.get(), EvaluationResponse.class);
-		log.info("Evaluation" + founded.toString());
+		EvaluationResponse founded = null;
+		Optional<Evaluation> evaluation = evaluationService.findById(id);
+
+		if (evaluation.isPresent()) {
+			founded = conversionService.convert(evaluation.get(), EvaluationResponse.class);
+			log.info("Evaluation %s", founded);
+		} else {
+			throw new ResourceNotFoundException("Evaluation not found");
+		}
 		return founded;
 	}
 
 	public EvaluationResponse convertToFindByName(String name) {
-		Optional<Evaluation> project = evaluationService.findByName(name);
-		EvaluationResponse founded = conversionService.convert(project.get(), EvaluationResponse.class);
-		log.info("Evaluation: " + founded.toString());
+		EvaluationResponse founded = null;
+		Optional<Evaluation> evaluation = evaluationService.findByName(name);
+
+		if (evaluation.isPresent()) {
+			founded = conversionService.convert(evaluation.get(), EvaluationResponse.class);
+			if (founded != null)
+				log.info("Company: {} ", founded);
+		} else {
+			throw new ResourceNotFoundException("Evaluation not found");
+		}
 		return founded;
 	}
 
@@ -48,8 +62,8 @@ public class EvaluationSupport {
 		return evaluations;
 	}
 
-	public EvaluationResponse convertToCreate(EvaluationRequest projectRequest) {
-		Evaluation evaluation = conversionService.convert(projectRequest, Evaluation.class);
+	public EvaluationResponse convertToCreate(EvaluationRequest evaluationRequest) {
+		Evaluation evaluation = conversionService.convert(evaluationRequest, Evaluation.class);
 		Evaluation saved = evaluationService.save(evaluation);
 		return getConverter(saved);
 	}
@@ -58,8 +72,8 @@ public class EvaluationSupport {
 		return conversionService.convert(evaluation, EvaluationResponse.class);
 	}
 
-	public EvaluationResponse convertToChange(Long id, EvaluationRequest projectRequest) {
-		Evaluation evaluation = conversionService.convert(projectRequest, Evaluation.class);
+	public EvaluationResponse convertToChange(Long id, EvaluationRequest evaluationRequest) {
+		Evaluation evaluation = conversionService.convert(evaluationRequest, Evaluation.class);
 		Evaluation updated = evaluationService.edit(id, evaluation);
 		return getConverter(updated);
 	}

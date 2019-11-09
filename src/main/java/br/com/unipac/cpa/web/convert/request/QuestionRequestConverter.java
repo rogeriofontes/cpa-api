@@ -22,6 +22,6 @@ public class QuestionRequestConverter implements Converter<QuestionRequest, Ques
         return Question.builder()
                 .title(questionRequest.getTitle())
                 .description(questionRequest.getDescription())
-                .evaluation(evaluation.get()).build();
+                .evaluation(evaluation.isPresent() ? evaluation.get() : new Evaluation()).build();
     }
 }

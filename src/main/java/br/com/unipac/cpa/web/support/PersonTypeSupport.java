@@ -1,24 +1,21 @@
 package br.com.unipac.cpa.web.support;
 
+import br.com.unipac.cpa.model.domain.PersonType;
+import br.com.unipac.cpa.model.service.PersonTypeService;
+import br.com.unipac.cpa.web.dto.response.PersonTypeResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.unipac.cpa.web.dto.response.PersonTypeResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Component;
-
-import br.com.unipac.cpa.model.domain.PersonType;
-import br.com.unipac.cpa.model.service.PersonTypeService;
-
+@Slf4j
 @Component
 public class PersonTypeSupport {
-
-	private static final Logger log = LogManager.getLogger(CompanyTypeSupport.class);
 
 	@Autowired
 	private PersonTypeService service;
@@ -35,8 +32,7 @@ public class PersonTypeSupport {
 				PersonTypeResponse saved = documentRegionConvert.convert(documentRegion, PersonTypeResponse.class);
 				documentRegions.add(saved);
 			});
-			
-			log.info(documentRegions.size());
+
 			return documentRegions;
 		}
 		
