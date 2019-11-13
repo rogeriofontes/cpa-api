@@ -1,11 +1,13 @@
 package br.com.unipac.cpa.model.domain;
 
 import br.com.unipac.cpa.exception.ResourceNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 public enum PersonType {
 	LEGAL(1, "Pessoa Juridica"), PHYSICAL(2, "Pessoa Fisica");
 
@@ -44,6 +46,7 @@ public enum PersonType {
 	}
 	
 	public static PersonType get(String personType) {
-		return Stream.of(PersonType.values()).filter(p -> p.name.equals(personType)).findAny().orElseThrow(() -> new ResourceNotFoundException("States not Found"));
+		log.info("Type" + personType);
+		return Stream.of(PersonType.values()).filter(p -> p.name().equals(personType)).findAny().orElseThrow(() -> new ResourceNotFoundException("PersonType not Found"));
 	}
 }

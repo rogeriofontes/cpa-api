@@ -11,8 +11,8 @@
 
 		</appender>
 		<!-- Rolling File Appender -->
-		<RollingFile name="FileAppender" fileName="/Users/rogeriofontes/logsistemas/cpa-api.log"
-			filePattern="/Users/rogeriofontes/logsistemas/cpa-api-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="FileAppender" fileName="/log/cpa-api.log"
+			filePattern="/log/cpa-api-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout>
 				<Pattern>${LOG_PATTERN}</Pattern>
 			</PatternLayout>

@@ -1,11 +1,13 @@
 package br.com.unipac.cpa.model.domain;
 
 import br.com.unipac.cpa.exception.ResourceNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 public enum DocumentRegion {
 	STATE_AC("AC", "Acre"),
 	STATE_AL("AL", "Alagoas"),
@@ -50,6 +52,7 @@ public enum DocumentRegion {
 	}
 	
 	public static DocumentRegion get(String states) {
+		log.info("States: " + states);
 		return Stream.of(DocumentRegion.values()).filter(p -> p.name().equals(states)).findAny().orElseThrow(() -> new ResourceNotFoundException("States not Found"));
 	}
 	
