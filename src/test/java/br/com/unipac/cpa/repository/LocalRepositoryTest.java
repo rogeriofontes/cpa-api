@@ -2,10 +2,12 @@ package br.com.unipac.cpa.repository;
 
 import br.com.unipac.cpa.model.domain.Local;
 import br.com.unipac.cpa.model.repository.LocalRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,12 +23,15 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-//@ActiveProfiles("dev")
-@AutoConfigureTestDatabase
-@ImportAutoConfiguration(exclude = FlywayAutoConfiguration.class)
+@ActiveProfiles("test")
+@ImportAutoConfiguration(exclude=FlywayAutoConfiguration.class)
+@AutoConfigureTestDatabase(connection = H2)
 public class LocalRepositoryTest {
 
     @Autowired
@@ -72,16 +77,16 @@ public class LocalRepositoryTest {
     @Test
     public void should_found_store_a_Local() {
         Local local = getLocal();
-        entityManager.persist(local);
+        Local result = entityManager.persist(local);
 
-        Optional<Local> found = localRepository.findById(getLocal().getId());
-        assertThat(found.get()).isEqualTo(local);
+        Optional<Local> found = localRepository.findById(result.getId());
+        assertThat(found.get()).isEqualTo(result);
     }
 
     @Test
     public void should_found_null_Local() {
         Optional<Local> fromDb = localRepository.findById(1l);
-        assertThat(fromDb.get()).isNull();
+        assertFalse(fromDb.isPresent());
     }
 
     @Test

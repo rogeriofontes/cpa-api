@@ -1,3 +1,4 @@
+/*
 package br.com.unipac.cpa.web.convert.request;
 
 import br.com.unipac.cpa.model.domain.Role;
@@ -46,3 +47,4 @@ public class AccountRequestConverter implements Converter<AccountRequest, User> 
         return roles;
     }
 }
+*/

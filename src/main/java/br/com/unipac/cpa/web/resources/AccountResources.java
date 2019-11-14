@@ -1,3 +1,4 @@
+/*
 package br.com.unipac.cpa.web.resources;
 
 import br.com.unipac.cpa.model.domain.User;
@@ -32,4 +33,4 @@ public class AccountResources {
         boolean registered = accountService.register(user);
     	return new ResponseEntity<>(registered, HttpStatus.CREATED);
 	}
-}
+}*/
