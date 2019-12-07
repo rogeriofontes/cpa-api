@@ -24,7 +24,6 @@ public class ChoiceRequestConverter implements Converter<ChoiceRequest, Choice> 
                 .description(choiceRequest.getDescription())
                 .point(choiceRequest.getPoint()).build();
 
-
         if(likertSkala.isPresent()) {
             choice.setLikertSkala(likertSkala.get());
         }

@@ -56,12 +56,19 @@ public class PeriodSupport {
     }
 
     public List<PeriodResponse> list() {
-        List<PeriodResponse> periods = new ArrayList<>();
-        service.listAll().forEach(period -> {
-            PeriodResponse saved = conversion.convert(period, PeriodResponse.class);
-            periods.add(saved);
-        });
-        return periods;
+        List<PeriodResponse> periodsResponse = new ArrayList<>();
+
+        List<Period> periods = service.listAll();
+        log.info("size: " + periods.size());
+
+        if (!periods.isEmpty()) {
+            periods.forEach(period -> {
+                PeriodResponse saved = conversion.convert(period, PeriodResponse.class);
+                periodsResponse.add(saved);
+            });
+        }
+
+        return periodsResponse;
     }
 
     public PeriodResponse convertToCreate(PeriodRequest periodRequest) {
